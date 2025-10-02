@@ -1,0 +1,65 @@
+<section class="pt-6 section-modulos">
+    <app-loader *ngIf="loading"></app-loader>
+
+    <div class="w-11/12 sm:w-3/4 lg:pl-6 m-auto">
+        <h2 class="font-bold text-xl text-white">Módulos</h2>
+        <nav class="flex items-center space-x-2 text-gray-600 text-sm flex-wrap text-white">
+            <ng-container *ngFor="let item of breadcrumb; let last = last">
+                <div class="flex items-center">
+                    <a *ngIf="!last" [routerLink]="item.url" class="hover:text-orange-400 font-medium">
+                        {{ item.label }}
+                    </a>
+                    <span *ngIf="last" class="text-white font-semibold">{{ item.label }}</span>
+                    <span *ngIf="!last" class="mx-2 text-gray-400">/</span>
+                </div> 
+            </ng-container>
+        </nav>
+    </div>
+    <div class="flex mt-3 lg:mt-12">
+        <main class="flex flex-col items-center lg:justify-center w-full">
+            <div class="flex flex-col justify-center items-center mb-10 text-white">
+                <a href="https://ccfirma.com/" target="_blank" rel="noopener noreferrer" class="mb-4">
+                    <img src="https://ccfirma.com/wp-content/uploads/2023/06/logo-2024-4-1.png"
+                    style="width: 400px; height: 150px;"
+                    alt="logo" class="mb-4"/>
+                </a>
+                <h1 class="text-3xl font-semibold">Canal de Denuncias</h1>
+                <span class="text-sm max-w-md text-center">Porque actuar con integridad también es parte del trabajo. Reporta y da seguimiento desde un solo lugar.</span>
+            </div>
+            <div class="mt-5 grid md:grid-cols-2 gap-6 max-w-2xl">
+                <div class="px-3 py-2 rounded-xl bg-white rounded-button">
+                    <div>
+                        <img src="https://canaletico.caroasociados.pe/uploads/Icono-1.png" alt="icono" width="200" height="200" />
+                    </div>
+                    <button [routerLink]="['poner-denuncia']" type="button" class="float-right mt-4 text-white px-4 py-2 rounded-lg flex items-center space-x-2">
+                        <div class="text-left font-bold">
+                            <p class="color-panton-orange">Poner Denuncia</p>
+                            <p class="text-xs text-gray-500">Registra tu denuncia de forma ágil, segura y confidencial.</p>	
+                        </div>
+                    </button>
+                </div>
+
+                <div class="px-3 py-2 rounded-xl bg-white rounded-button">
+                    <div>
+                        <img src="https://canaletico.caroasociados.pe/uploads/Icono-2.png" alt="icono" width="200" height="200" />
+                    </div>
+                    <button [routerLink]="['ver-denuncias']" class="float-right mt-4 text-white px-4 py-2 rounded-lg flex space-x-2">
+                        <div class="text-left font-bold">
+                            <p class="color-panton-orange">Visualizar Denuncia</p>
+                            <p class="text-xs text-gray-500">Consulte el estado de su denuncia, fácil y seguro.</p>
+                        </div>
+                    </button>
+                </div>
+
+                <!-- <div class="bg-white p-6 rounded-xl shadow-beautiful">
+                    <h2 class="text-xl font-semibold mb-3">Visualizar Denuncia</h2>
+                    <p class="text-gray-600">Consulta el estado de tu denuncia, fácil y seguro.</p>
+                    <button [routerLink]="['ver-denuncias']" class="float-right mt-4 background-panton-orange text-white px-4 py-2 rounded-lg flex items-center space-x-2">
+                        <i class="fas fa-eye"></i>
+                        <span>Acceder</span>
+                    </button>
+                </div> -->
+            </div>
+        </main>
+    </div>
+</section>

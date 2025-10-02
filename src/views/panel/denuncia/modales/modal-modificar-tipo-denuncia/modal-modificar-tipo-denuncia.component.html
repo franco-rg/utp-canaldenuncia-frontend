@@ -1,0 +1,26 @@
+<div *ngIf="show" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white p-6 rounded-lg shadow-md w-full max-w-md">
+        <h2 class="text-xl font-semibold mb-4">Modificar Tipo de Denuncia</h2>
+
+        <form [formGroup]="form" (ngSubmit)="enviar()" class="space-y-4 row">
+            <div class="col-span-12">
+                <label class="block text-sm font-medium">Tipo de Denuncia <span class="text-red-500">*</span></label>
+                <select formControlName="IDTPODENUNCIA" class="w-full border p-2 rounded">
+                    <option selected value="">-- Seleccione</option>
+                    <option *ngFor="let denuncia of denuncias" [value]="denuncia.id">{{ denuncia.descp }}</option>
+                </select>
+                <div *ngIf="form.get('IDTPODENUNCIA')?.invalid && form.get('IDTPODENUNCIA')?.touched" class="text-red-500 text-sm">
+                    Campo requerido
+                </div>
+            </div>
+
+            <div class="flex justify-end gap-2 mt-4">
+                <button type="button" (click)="cerrar()"
+                    class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">Cancelar</button>
+                <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Guardar</button>
+            </div>
+        </form>
+
+        <app-loader *ngIf="loading"></app-loader>
+    </div>
+</div>

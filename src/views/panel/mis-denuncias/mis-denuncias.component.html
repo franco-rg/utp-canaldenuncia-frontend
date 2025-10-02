@@ -1,0 +1,29 @@
+<div>
+  <div class="grid grid-cols-1 md:grid-cols-12 gap-3 mb-4 items-end">
+    <div class="md:col-span-3">
+      <input type="text" [(ngModel)]="filter.search" placeholder="Buscar..."
+        class="w-full border p-2 rounded-lg text-sm" />
+    </div>
+
+    <div class="md:col-span-3">
+      <select [(ngModel)]="filter.estado" class="w-full border p-2 rounded-lg text-sm">
+        <option value="">-- Seleccione</option>
+        <option 
+        [value]="estado.vlR1" *ngFor="let estado of getGrupoDato('GDDENUNCIA')">{{ estado.dtlle }}</option>
+      </select>
+    </div>
+
+    <div class="md:col-span-4 md:col-start-9 flex gap-2 justify-end">
+      <button (click)="onPageChange(currentPage)"
+        class="bg-blue-600 text-white text-sm px-4 py-2 rounded-md flex items-center gap-1 hover:bg-blue-700">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <span>Buscar</span>
+      </button>
+    </div>
+  </div>
+
+  <app-table [data]="data" [totalItems]="totalItems" [pageSize]="pageSize" [displayedColumns]="displayedColumns"
+    [currentPage]="currentPage" [loading]="loading" (pageChange)="onPageChange($event)">
+  </app-table>
+
+</div>

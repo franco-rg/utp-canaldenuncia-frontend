@@ -1,0 +1,5 @@
+@media (max-width: 768px) {
+  .fixed-sidebar {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+}

@@ -1,0 +1,58 @@
+<div *ngIf="show" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white p-6 rounded-lg shadow-md w-full max-w-md">
+        <h2 class="text-xl font-semibold mb-4">Editar Parametro</h2>
+
+        <form [formGroup]="form" (ngSubmit)="enviar()" class="space-y-4 row">
+            <div class="col-span-12">
+                <label class="block text-sm font-medium">Descripción <span class="text-red-500">*</span></label>
+                <input formControlName="DESCP" class="w-full border p-2 rounded" />
+                <div *ngIf="form.get('DESCP')?.invalid && form.get('DESCP')?.touched" class="text-red-500 text-sm">
+                    El nombre es requerido
+                </div>
+            </div>
+
+            <div class="col-span-12">
+                <label class="block text-sm font-medium">abreviatura <span class="text-red-500">*</span></label>
+                <input formControlName="ABREV" class="w-full border p-2 rounded" />
+                <div *ngIf="form.get('ABREV')?.invalid && form.get('ABREV')?.touched" class="text-red-500 text-sm">
+                    La abreviatura es requerida
+                </div>
+            </div>
+
+            <div class="col-span-12 md:col-span-4">
+                <label class="block text-sm font-medium">Valor 1 <span class="text-red-500">*</span></label>
+                <input formControlName="VLR1" class="w-full border p-2 rounded" />
+                <div *ngIf="form.get('VLR1')?.invalid && form.get('VLR1')?.touched" class="text-red-500 text-sm">
+                    El valor 1 es requerido
+                </div>
+            </div>
+
+            <div class="col-span-12 md:col-span-4">
+                <label class="block text-sm font-medium">Valor 2</label>
+                <input formControlName="VLR2" class="w-full border p-2 rounded" />
+            </div>
+
+            <div class="col-span-12 md:col-span-4">
+                <label class="block text-sm font-medium">Valor 3</label>
+                <input formControlName="VLR3" class="w-full border p-2 rounded" />
+            </div>
+
+            
+            <div class="col-span-12">
+                <label class="block text-sm font-medium">Estado</label>
+                <select formControlName="CESTDO" class="w-full border p-2 rounded">
+                    <option value="A">Activo</option>
+                    <option value="I">Inactivo</option>
+                </select>
+            </div>
+            
+            <div class="flex justify-end gap-2 mt-4">
+                <button type="button" (click)="cerrar()"
+                    class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">Cancelar</button>
+                <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Enviar</button>
+            </div>
+        </form>
+
+        <app-loader *ngIf="loading"></app-loader>
+    </div>
+</div>

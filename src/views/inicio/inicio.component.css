@@ -1,0 +1,17 @@
+.inicio-bg {
+    background-color: #e5e5f7;
+    background-color: rgba(0, 0, 0, 0.5);
+    background-image: url('./../../assets/img/business-bg-2.jpg');
+    background-blend-mode: multiply;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top center;
+}
+
+.bg-gradient-orange {
+    background-image: linear-gradient(to right, #FF6A16, #fc3356 );
+}
+
+.bg-anonimo{
+    background-image: linear-gradient(to right, #d4d4d4, #808080 );
+}

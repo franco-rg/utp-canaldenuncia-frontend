@@ -1,0 +1,62 @@
+<div>
+    <form  [formGroup]="form" (ngSubmit)="enviar()" class="grid grid-cols-12 gap-4">
+        <div class="col-span-12 md:col-span-4 m-0">
+            <label class="block text-sm font-medium">P. Nombre <span class="text-red-500">*</span></label>
+            <input formControlName="NOMBRS" class="w-full border p-2 rounded" />
+            <div *ngIf="form.get('NOMBRS')?.invalid && form.get('NOMBRS')?.touched" class="text-red-500 text-sm">
+                El primer nombre es requerido.
+            </div>
+        </div>
+
+        <div class="col-span-12 md:col-span-4 m-0">
+            <label class="block text-sm font-medium">S. Nombre</label>
+            <input formControlName="SNOMBRS" class="w-full border p-2 rounded" />
+        </div>
+
+        <div class="col-span-12 md:col-span-4 m-0">
+            <label class="block text-sm font-medium">P. Apellido <span class="text-red-500">*</span></label>
+            <input formControlName="APLLDS" class="w-full border p-2 rounded" />
+            <div *ngIf="form.get('APLLDS')?.invalid && form.get('APLLDS')?.touched" class="text-red-500 text-sm">
+                El primer apellido es requerido.
+            </div>
+        </div>
+
+        <div class="col-span-12 md:col-span-4 m-0">
+            <label class="block text-sm font-medium">S. Apellido</label>
+            <input formControlName="SAPLLDS" class="w-full border p-2 rounded" />
+        </div>
+
+        <div class="col-span-12 md:col-span-4 m-0">
+            <label class="block text-sm font-medium">Nro. de Identidad <span class="text-red-500">*</span></label>
+            <input formControlName="DCUMNTO" class="w-full border p-2 rounded" />
+            <div *ngIf="form.get('DCUMNTO')?.invalid && form.get('DCUMNTO')?.touched" class="text-red-500 text-sm">
+                El número de identidad es requerido.
+            </div>
+        </div>
+
+        <div class="col-span-12 md:col-span-4 m-0">
+            <label class="block text-sm font-medium">Correo <span class="text-red-500">*</span></label>
+            <input 
+            [readonly]="true"
+            formControlName="CORREO" class="w-full border p-2 rounded" />
+            <div *ngIf="form.get('CORREO')?.invalid && form.get('CORREO')?.touched" class="text-red-500 text-sm">
+                El correo es requerido.
+            </div>
+        </div>
+
+        <div class="col-span-12 md:col-span-4 m-0">
+            <label class="block text-sm font-medium">Contraseña <small class="text-gray-500">(solo si desea
+                    cambiarla)</small></label>
+            <input type="PASSWORD" formControlName="PASSWORD" class="w-full border p-2 rounded" />
+        </div>
+
+        <!-- // boton guardar -->
+        <div class="col-span-12">
+            <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+                Guardar
+            </button>
+        </div>
+        <app-loader *ngIf="loading"></app-loader>
+
+    </form>
+</div>

@@ -1,0 +1,48 @@
+<header class="fixed bg-gray-950 top-0 right-0 left-0 px-4 md:px-0 py-2.5 shadow-xl z-50">
+    <div class="max-w-screen-lg m-auto">
+        <div class="flex justify-between items-center">
+            <!-- Logo -->
+            <div class="flex items-center">
+                <a href="https://ccfirma.com/" target="_blank" class="flex items-center">
+                    <img src="../../../assets/img/logo-caro-asociados-letters-white.png" class="h-12" alt="Logo" />
+                </a>
+            </div>
+
+            <!-- Botón hamburguesa -->
+            <button (click)="toggleMenu()" class="md:hidden text-white text-2xl">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <!-- Menú de navegación -->
+            <nav [ngClass]="{'hidden md:flex': !menuOpen, 'flex flex-col absolute top-full left-0 w-full bg-sky-800 shadow-lg md:relative md:bg-transparent md:w-auto md:shadow-none': menuOpen}"
+                class="gap-x-6 text-white md:flex-row md:items-center md:gap-x-6 h-16">
+                <button (click)="navigateTo('inicio')"
+                    class="py-2 px-4 text-xs font-bold uppercase border-b-4 transition-all"
+                    [ngClass]="{ 'border-panton-orange': activeSection === 'inicio', 'border-transparent': activeSection !== 'inicio' }"
+                    >
+                    Inicio
+                </button>
+                <button (click)="navigateTo('queEs')"
+                    class="py-2 px-4 text-xs font-bold uppercase border-b-4 transition-all"
+                    [ngClass]="{ 'border-panton-orange': activeSection === 'queEs', 'border-transparent': activeSection !== 'queEs' }"
+                    >
+                    ¿Qué es Canal Denuncia?
+                </button>
+                <button (click)="navigateTo('comoEnviar')"
+                    class="py-2 px-4 text-xs font-bold uppercase border-b-4 transition-all"
+                    [ngClass]="{ 'border-panton-orange': activeSection === 'comoEnviar', 'border-transparent': activeSection !== 'comoEnviar' }">
+                    ¿Cómo enviar una Denuncia?
+                </button>
+                <button (click)="navigateTo('soporte')"
+                    class="py-2 px-4 text-xs font-bold uppercase border-b-4 transition-all"
+                    [ngClass]="{ 'border-panton-orange': activeSection === 'soporte', 'border-transparent': activeSection !== 'soporte' }">
+                    Soporte
+                </button>
+
+                <button [routerLink]="['/iniciar-sesion']" class="px-3 py-2 text-xs font-bold rounded-xl background-panton-orange text-white shadow-lg md:ml-4">
+                    Iniciar Sesión
+                </button>
+            </nav>
+        </div>
+    </div>
+</header>

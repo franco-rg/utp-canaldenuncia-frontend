@@ -1,0 +1,313 @@
+<div>
+    <section #inicio class="text-center h-svh flex flex-col justify-center items-center inicio-bg">
+        <div class="flex justify-center items-center h-full">
+            <div class="text-white">
+                <h1 class="text-6xl font-bold">Canal de Denuncias</h1>
+                <span class="mt-4 text-xl max-w-xl block">Tu voz cuenta: un canal confidencial para fortalecer la
+                    transparencia y construir juntos una empresa más íntegra y comprometida.</span>
+                <div class="mt-4">
+                    <button [routerLink]="['/modulos']" type="button"
+                        class="focus:outline-none font-bold text-white bg-orange-700 hover:bg-orange-800 rounded-lg text-sm px-5 py-2.5 me-2 mb-2 background-panton-orange transition-all">Comenzar</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class='-mt-14 rounded-xl bg-white m-auto max-w-screen-lg px-10 py-6 shadow-xl'>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 text-center text-gray-700">
+                <div class="flex items-start gap-3">
+                    <i class="fas fa-lock text-2xl text-gray-600"></i>
+                    <div class="text-left">
+                        <h4 class="font-semibold">Confidencialidad</h4>
+                        <p class="text-xs text-gray-500">Tu identidad y denuncia serán protegidas en todo momento.</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-3">
+                    <i class="fa-solid fa-eye text-2xl text-gray-600"></i>
+                    <div class="text-left">
+                        <h4 class="font-semibold">Transparencia</h4>
+                        <p class="text-xs text-gray-500">Ayúdanos a fortalecer la ética y el cumplimiento en nuestra
+                            empresa.</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-3">
+                    <i class="fa-solid fa-hand text-2xl text-gray-600"></i>
+                    <div class="text-left">
+                        <h4 class="font-semibold">Sin Represalias</h4>
+                        <p class="text-xs text-gray-500">Garantizamos un ambiente seguro para reportar cualquier
+                            incidente.</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-3">
+                    <i class="fas fa-headset text-2xl text-gray-600"></i>
+                    <div class="text-left">
+                        <h4 class="font-semibold">Soporte</h4>
+                        <p class="text-xs text-gray-500">Resolvemos dudas sobre normativas y procedimientos internos.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section #queEs class="pt-10 lg:pt-16 px-6">
+        <div class="max-w-screen-lg m-auto text-center">
+            <h2 class="font-extrabold text-3xl md:text-4xl text-gray-600">¿Qué es el Canal de Denuncias?</h2>
+            <p class="mt-4 text-gray-600 text-lg md:text-xl">Un canal confidencial para reportar incidencias y consultas
+                sobre normas internas.</p>
+        </div>
+
+        <div class="max-w-screen-lg m-auto mt-8 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <div class="flex justify-center m-auto">
+                <div class="grid grid-cols-2 gap-8">
+                    <div (click)="selection = 'manual'"
+                        [ngClass]="{'background-panton-orange-noHover': selection == 'manual'}"
+                        class="p-6 rounded-2xl shadow-beautiful flex flex-col space-y-3 cursor-pointer">
+                        <div class="background-panton-orange-2 p-3 rounded-full w-12 h-12">
+                            <i class="fa-solid fa-book text-xl -mt-0.5 text-orange-700"></i>
+                        </div>
+                        <h6 class="text-sm font-semibold text-gray-600"
+                            [ngClass]="{'text-white': selection == 'manual'}">Manual de uso</h6>
+                    </div>
+
+                    <div class="p-6 rounded-2xl shadow-beautiful flex flex-col space-y-3 cursor-pointer"
+                        (click)="openWindow()">
+                        <div class="background-panton-orange-2 p-3 rounded-full w-12 h-12">
+                            <i class="fa-solid fa-star text-xl -mt-0.5 text-orange-700"></i>
+                        </div>
+                        <h6 class="text-sm font-semibold text-gray-600">Código de conducta</h6>
+                    </div>
+
+                    <div class="p-6 rounded-2xl shadow-beautiful flex flex-col space-y-3 cursor-pointer"
+                        [ngClass]="{'background-panton-orange-noHover': selection == 'preguntas'}"
+                        (click)="selection = 'preguntas'">
+                        <div class="background-panton-orange-2 p-3 rounded-full w-12 h-12">
+                            <i class="fa-solid fa-circle-question text-xl text-orange-700"></i>
+                        </div>
+                        <span class="text-sm font-semibold text-gray-600"
+                            [ngClass]="{'text-white': selection == 'preguntas'}">Preguntas frecuentes</span>
+                    </div>
+                </div>
+            </div>
+            <div class="text-gray-700 space-y-5" *ngIf="selection == 'manual'">
+                <p class="text-justify">
+                    En <span class="font-semibold text-orange-600">Caro & Asociados</span> ponemos a disposición de
+                    todos
+                    <span class="font-semibold text-gray-600">—empleados, colaboradores, clientes, proveedores y
+                        aliados— </span>
+                    un canal de comunicación confidencial para reportar incidencias y consultas.
+                </p>
+
+                <p class="text-justify">
+                    Valoramos y agradecemos toda información relacionada con <span
+                        class="font-semibold text-gray-600">malas prácticas financieras, contables, comerciales, éticas
+                        o de cumplimiento, </span>
+                    ya que nos permite <span class="font-semibold text-gray-600">actuar con oportunidad, </span> aplicar
+                    <span class="font-semibold text-gray-600">mejoras continuas </span> y reforzar nuestra cultura de
+                    <span class="font-semibold text-gray-600">integridad.</span>
+                </p>
+
+                <p class="text-justify">
+                    Toda comunicación se canaliza a través del formulario habilitado, con el compromiso de garantizar
+                    <span class="font-semibold text-gray-600">absoluta confidencialidad.</span>
+                    Además, activaremos todas las medidas necesarias para prevenir cualquier tipo de represalia.
+                </p>
+                <p class="text-justify">
+                    Este canal también está diseñado para <span class="font-semibold text-gray-600">aclarar dudas </span>
+                    sobre la aplicación de nuestras
+                    <span class="font-semibold text-gray-600">normas y procedimientos internos. </span>
+                    En Caro & Asociados, creemos firmemente en que la transparencia es el pilar de una organización
+                    sólida y en constante evolución.
+                </p>
+
+            </div>
+            <div class="text-gray-700 space-y-5" *ngIf="selection == 'preguntas'">
+                <div class="faq-container">
+                    <div *ngFor="let faq of faqs; let i = index" class="faq-item border-b py-4">
+                        <button (click)="toggleFaq(i)"
+                            class="w-full text-left font-medium text-lg flex justify-between items-center
+                            font-semibold
+                            ">
+                            {{ faq.question }}
+                            <span [class.rotate-180]="faq.open" class="transition-transform">▼</span>
+                        </button>
+                        <div *ngIf="faq.open" class="mt-2 text-gray-700"
+                        [innerHTML]="faq.answer"
+                        >
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <section #comoEnviar class="bg-anonimo text-white py-12 lg:py-16 mt-10">
+        <div class="max-w-5xl mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-8">¿Cómo enviar una denuncia?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white text-gray-600 p-6 rounded-xl shadow-lg space-y-4">
+                    <h3 class="text-lg font-semibold">
+                        Para una gestión efectiva y responsable, las comunicaciones recibidas a través del canal deben
+                        incluir información suficiente que permita analizar y actuar con criterio frente a los hechos
+                        reportados.
+                    </h3>
+                    <p>Asegúrate de incluir lo siguiente:</p>
+                    <ul class="list-disc pl-5 space-y-2 text-gray-700">
+                        <li>Una descripción clara y detallada de los hechos.</li>
+                        <li>La identificación de las personas involucradas en el comportamiento denunciado o que tengan
+                            conocimiento del mismo.</li>
+                        <li>El momento o periodo en que ocurrió (o está ocurriendo) la situación.</li>
+                        <li>Cualquier documento, archivo o evidencia relevante que respalde la denuncia.</li>
+                        <li>Un medio de contacto para solicitar información adicional, si fuera necesario.</li>
+                    </ul>
+                    <p class="text-sm text-gray-600">Mientras más completa sea la información proporcionada, mayor será
+                        nuestra capacidad para evaluar, resolver y actuar con diligencia.</p>
+
+                    <div class="bg-red-100 text-red-700 p-4 rounded-lg mt-4">
+                        <h4 class="font-semibold">Sobre las denuncias falsas</h4>
+                        <p class="text-sm">
+                            Caro & Asociados promueve una cultura de integridad y responsabilidad.
+                            Por ello, cualquier denuncia falsa o de mala fe será tratada con la debida seriedad y estará
+                            sujeta a las sanciones previstas en nuestro régimen disciplinario interno.
+                        </p>
+                    </div>
+                </div>
+                <div class="bg-white text-gray-600 p-6 rounded-xl shadow-lg space-y-6">
+                    <h3 class="text-lg font-semibold">¿Confidencial o Anónima?</h3>
+                    <p class="text-gray-700">El canal de denuncias permite optar por dos modalidades de envío:
+                        Confidencial o Anónima, según la preferencia del denunciante.</p>
+
+                    <div class="bg-blue-100 p-4 rounded-lg">
+                        <h4 class="font-semibold text-blue-800">Confidencial</h4>
+                        <p class="text-sm text-gray-700">
+                            Si decides proporcionar tus datos de contacto, el gestor de la denuncia podrá comunicarse
+                            contigo para solicitar información adicional si fuera necesario, asegurando que el proceso
+                            de análisis sea completo y efectivo.
+                        </p>
+                    </div>
+
+                    <div class="bg-green-100 p-4 rounded-lg">
+                        <h4 class="font-semibold text-green-800">Anónima</h4>
+                        <p class="text-sm text-gray-700">Si prefieres mantener el anonimato, podrás realizar la denuncia
+                            sin revelar tu identidad. Para ello, es importante que guardes el identificador único y la
+                            contraseña generada al momento de hacer tu denuncia. Esta información es esencial para el
+                            seguimiento de tu caso y para saber si el gestor requiere más detalles. Si olvidas tu
+                            contraseña, puedes recuperarla mediante el correo electrónico que hayas proporcionado al
+                            crear la denuncia. Ten en cuenta que la denuncia seguirá siendo completamente anónima.</p>
+                    </div>
+
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <p style="color: #FF6A16" class="text-sm font-semibold">Es fundamental que, en caso de que el
+                            gestor solicite más información, esta sea proporcionada para garantizar que la denuncia sea
+                            gestionada correctamente y no se cierre por falta de datos.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section #soporte>
+        <!-- // formulario campos NOMBRE, APELLIDO, ASUNTO, CORREO, MENSAJE , TODOS OBLIGATORIOS -->
+        <div class="max-w-screen-lg mx-auto my-16 px-4 grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
+            <!-- Sección de texto e imagen -->
+            <div class="space-y-6">
+                <h2 class="text-4xl font-bold text-gray-600">¿Necesitas ayuda?</h2>
+                <p class="text-gray-600">Si tienes dudas sobre el funcionamiento del canal o necesitas orientación
+                    adicional, puedes comunicarte con nosotros.</p>
+                <p class="text-gray-600">En <span class="font-bold">Caro & Asociados </span>estamos comprometidos con
+                    una comunicación clara, segura y accesible.
+                    Cuenta con nuestro acompañamiento en todo momento.
+                </p>
+                <div class="rounded-xl overflow-hidden shadow-lg w-full">
+                    <img src="https://ccfirma.com/wp-content/uploads/2023/07/mujer-ccfirma.jpg" alt="Asistencia"
+                        class="w-full h-auto object-cover">
+                </div>
+            </div>
+
+            <!-- Formulario -->
+            <form [formGroup]="form" (ngSubmit)="enviar()" class="bg-white p-6 rounded-xl shadow space-y-6">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Nombres <span
+                            class="text-red-500">*</span></label>
+                    <input formControlName="NOMBRE"
+                        class="w-full mt-1 border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                    <div *ngIf="form.get('NOMBRE')?.invalid && form.get('NOMBRE')?.touched"
+                        class="text-red-500 text-sm mt-1">
+                        El nombre es requerido
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Apellidos <span
+                            class="text-red-500">*</span></label>
+                    <input formControlName="APELLIDO"
+                        class="w-full mt-1 border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                    <div *ngIf="form.get('APELLIDO')?.invalid && form.get('APELLIDO')?.touched"
+                        class="text-red-500 text-sm mt-1">
+                        El apellido es requerido
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Asunto <span
+                            class="text-red-500">*</span></label>
+                    <input formControlName="ASUNTO"
+                        class="w-full mt-1 border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                    <div *ngIf="form.get('ASUNTO')?.invalid && form.get('ASUNTO')?.touched"
+                        class="text-red-500 text-sm mt-1">
+                        El asunto es requerido
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Correo electrónico <span
+                            class="text-red-500">*</span></label>
+                    <input formControlName="CORREO" type="email"
+                        class="w-full mt-1 border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                    <div *ngIf="form.get('CORREO')?.invalid && form.get('CORREO')?.touched"
+                        class="text-red-500 text-sm mt-1">
+                        El correo electrónico es requerido
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Mensaje <span
+                            class="text-red-500">*</span></label>
+                    <textarea formControlName="MENSAJE" rows="4"
+                        class="w-full mt-1 border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                    <div *ngIf="form.get('MENSAJE')?.invalid && form.get('MENSAJE')?.touched"
+                        class="text-red-500 text-sm mt-1">
+                        El mensaje es requerido
+                    </div>
+                </div>
+
+                <div class="flex items-start">
+                    <input type="checkbox" id="ACCEPTED" formControlName="ACCEPTED"
+                        [ngClass]="{'checkerror': form.get('ACCEPTED')?.invalid && form.get('ACCEPTED')?.touched}"
+                        class="mt-1 mr-2" />
+                    <label for="politica" class="text-gray-600" style="font-size: 10px;">
+                        En cumplimiento de la Ley de protección de datos personales <span class="font-bold">(Ley N°
+                            29733) </span>y su reglamento, informamos que los datos personales recolectados por Caro &
+                        Asociados a través del formulario serán utilizados exclusivamente para la evaluación, gestión y
+                        seguimiento de la denuncia. Usted tiene derecho a acceder, rectificar y suprimir sus datos, así
+                        como a ejercer los demás derechos reconocidos en nuestra
+                        <a href="https://ccfirma.com/wp-content/uploads/2024/09/Poliitica-de-Privacidad-CA__2024.pdf"
+                            target="_blank" class="font-bold">Política de Privacidad.</a></label>
+                </div>
+
+                <div class="flex justify-end">
+                    <button type="submit" class="px-5 py-2 font-bold rounded-xl bg-orange-500 text-white shadow-lg">
+                        Enviar
+                    </button>
+                </div>
+
+                <p class="text-xs text-gray-500 mt-4">Los campos marcados con (
+                    <span class="text-red-500">*</span> )son obligatorios.
+                </p>
+            </form>
+        </div>
+        <app-loader *ngIf="loading"></app-loader>
+
+    </section>
+</div>

@@ -1,0 +1,106 @@
+/* TailwindCSS */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "~@fortawesome/fontawesome-free/css/all.min.css";
+
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.shadow-beautiful {
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.swal2-confirm {
+    background-color: #ED6A23 !important;
+    color: white !important;
+}
+
+
+input:not([disabled]),
+select:not([disabled]),
+textarea:not([disabled]) {
+    cursor: pointer;
+}
+
+input:disabled,
+select:disabled,
+textarea:disabled {
+    cursor: not-allowed;
+}
+
+.swal2-select {
+    border: 1px solid #ED6A23 !important;
+}
+
+.chart-legend .legend-labels {
+    float: none !important;
+    white-space: normal !important;
+}
+
+.border-panton-orange {
+    border-bottom: 2px solid #FF6A16 !important;
+}
+
+.color-panton-orange {
+    color: #FF6A16 !important;
+}
+
+.background-panton-orange {
+    background-color: #FF6A16 !important;
+}
+
+.background-panton-orange-noHover {
+    background-color: #FF6A16 !important;
+}
+
+.background-panton-orange:hover {
+    background-color: #ED6A23 !important;
+}
+
+.background-panton-orange-2 {
+    background-color: #FFECE3 !important;
+}
+
+input[type="checkbox"].checkerror {
+    appearance: none;
+    width: 60px;
+    height: 12px;
+    border: 1px solid red;
+    /* color del borde cuando tiene la clase */
+    border-radius: 2px;
+    cursor: pointer;
+    position: relative;
+}
+
+input[type="checkbox"].checkerror:checked::after {
+    content: "✓";
+    color: white;
+    position: absolute;
+    left: 3px;
+    top: -1px;
+    font-size: 18px;
+}
+
+input[type="checkbox"].checkerror:checked {
+    background-color: red;
+    border-color: red;
+}
+
+.faq-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.faq-item button {
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.rotate-180 {
+    transform: rotate(180deg);
+}

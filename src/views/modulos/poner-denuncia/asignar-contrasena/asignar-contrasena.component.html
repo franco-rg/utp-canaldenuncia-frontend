@@ -1,0 +1,77 @@
+<section>
+  <h2 class="text-2xl font-semibold mb-6 text-gray-600">Asignar una contraseña a la denuncia</h2>
+  <form [formGroup]="formAsignarContrasena">
+    <p class="text-gray-600 text-sm mb-4">
+      Para acceder a la información de la comunicación, es indispensable crear una contraseña.
+    </p>
+  
+    <div class="mb-4 relative">
+      <label class="block text-gray-700 font-medium mb-1">Contraseña <span class="text-red-500">*</span></label>
+      <div class="relative">
+        <input [type]="showPassword ? 'text' : 'password'" formControlName="Contrasena"
+          placeholder="Contraseña" class="w-full border p-2 rounded pr-10 outline-none"
+          [ngClass]="{ 'border-red-500': formAsignarContrasena.controls['Contrasena'].invalid && formAsignarContrasena.controls['Contrasena'].dirty }">
+        <button type="button" class="absolute top-2 right-3 text-gray-500"
+          (click)="togglePasswordVisibility('password')">
+          <i [class]="showPassword ? 'fas fa-eye' : 'fas fa-eye-slash'"></i>
+        </button>
+      </div>
+  
+      <div class="flex flex-col">
+          <small *ngIf="formAsignarContrasena.controls['Contrasena'].hasError('required') && formAsignarContrasena.controls['Contrasena'].dirty" class="text-red-500">
+            La contraseña es obligatoria.
+          </small>
+          <small *ngIf="formAsignarContrasena.controls['Contrasena'].hasError('shortPassword')" class="text-red-500">
+            La contraseña debe tener al menos 8 caracteres.
+          </small>
+          <small *ngIf="formAsignarContrasena.controls['Contrasena'].hasError('noUpperCase')" class="text-red-500">
+            La contraseña debe incluir al menos una mayúscula.
+          </small>
+          <small *ngIf="formAsignarContrasena.controls['Contrasena'].hasError('noLowerCase')" class="text-red-500">
+            La contraseña debe contener al menos una letra minúscula.
+          </small>
+          <small *ngIf="formAsignarContrasena.controls['Contrasena'].hasError('noNumber')" class="text-red-500">
+            La contraseña debe contener al menos un número.
+          </small>
+          <small *ngIf="formAsignarContrasena.controls['Contrasena'].hasError('noSpecialChar')" class="text-red-500">
+            La contraseña debe contener al menos un carácter especial.
+          </small>
+      </div>
+    </div>
+  
+    <div class="mb-4 relative">
+      <label class="block text-gray-700 font-medium mb-1">Repetir contraseña <span class="text-red-500">*</span></label>
+      <div class="relative">
+        <input [type]="showRepeatPassword ? 'text' : 'password'" formControlName="RepetirContrasena"
+          placeholder="Repetir contraseña" class="w-full border p-2 rounded pr-10 outline-none"
+          [ngClass]="{ 'border-red-500': formAsignarContrasena.hasError('passwordsMismatch') && formAsignarContrasena.controls['RepetirContrasena'].dirty }">
+        <button type="button" class="absolute top-2 right-3 text-gray-500"
+          (click)="togglePasswordVisibility('repeatPassword')">
+          <i [class]="showRepeatPassword ? 'fas fa-eye' : 'fas fa-eye-slash'"></i>
+        </button>
+      </div>
+      <small *ngIf="formAsignarContrasena.hasError('passwordsMismatch') && formAsignarContrasena.controls['RepetirContrasena'].dirty"
+            class="text-red-500">
+            Las contraseñas no coinciden.
+      </small>
+    </div>
+  
+    <div class="mb-4" *ngIf="!correoDenunciante">
+      <label class="block text-gray-700 font-medium mb-1">Correo </label>
+      <input 
+        type="email" 
+        formControlName="Correo" 
+        placeholder="Correo" 
+        class="w-full border p-2 rounded outline-none"
+        >
+        <!-- <small *ngIf="formAsignarContrasena.controls['Correo'].invalid && formAsignarContrasena.controls['Correo'].dirty" class="text-red-500">
+        [ngClass]="{ 'border-red-500': formAsignarContrasena.controls['Correo'].invalid && formAsignarContrasena.controls['Correo'].dirty }"
+          El correo no es válido.
+        </small> -->
+      </div>
+
+    <p class="text-gray-600 text-sm mb-4" *ngIf="!correoDenunciante">
+      Hemos detectado que no has proporcionado un correo electrónico. Se puede proporcionar de manera opcional un e-mail que permitirá recuperar la contraseña en caso de pérdida para poder acceder al contenido de la comunicación.
+    </p>
+  </form>  
+</section>

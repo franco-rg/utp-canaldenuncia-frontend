@@ -1,0 +1,71 @@
+<section>
+  <h2 class="text-2xl font-semibold mb-6 text-gray-600">Archivos</h2>
+  <form [formGroup]="formDatosArchivos">
+    <div class="border-dashed border-4 rounded-xl p-6 flex flex-col items-center justify-center cursor-pointer"
+        [ngClass]="archivoCargado ? 'border-green-500' : 'border-orange-500'"
+        (click)="seleccionarArchivo()">
+        <input #fileInput formControlName="Archivo" type="file" class="hidden" (change)="onFileSelected($event)">
+        <div class="flex flex-col items-center">
+            <div class="w-16 h-16 flex items-center justify-center rounded-full" [ngClass]="archivoCargado ? 'bg-green-100' : 'bg-orange-100'">
+                <i *ngIf="!archivoCargado" class="fa-solid fa-cloud-arrow-up text-2xl text-orange-500"></i>
+                <i *ngIf="archivoCargado" class="fa-solid fa-check text-2xl text-green-500"></i>
+            </div>
+            <p class="text-gray-600 mt-2">{{ archivoCargado ? 'Archivo cargado' : 'Haz clic para subir un archivo' }}</p>
+        </div>
+    </div>
+
+    
+      <div class="mt-4">
+        <label class="block text-gray-700 font-medium mb-1">Comentarios</label>
+        <textarea formControlName="ComentarioArchivos" rows="5" placeholder="Comentarios" class="w-full border p-2 rounded outline-none"></textarea>
+        <p class="text-gray-500 text-sm mt-1">
+            {{ formDatosArchivos.controls['ComentarioArchivos'].value?.length || "0" }}/4000 caracteres
+        </p>
+      </div>
+      <div>
+        <p class="w-full block text-gray-600 text-sm mt-4 text-center">
+          En este apartado puedes proporcionar detalles sobre los archivos subidos, si lo consideras necesario.<br>
+          Se pueden agregar de manera opcional archivos que sustenten la comunicación.
+        </p>
+      </div>
+    
+      <div class="flex">
+          <button (click)="agregarArchivo()" type="button" class="p-3 text-white rounded-xl disabled:bg-gray-400 bg-gray-600 hover:bg-gray-700 mt-4">
+            Cargar archivo y/o comentario
+          </button>
+      </div>
+  </form>
+
+  <div *ngIf="archivos.length" class="relative overflow-x-auto sm:rounded-lg mt-4">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <tr>
+            <th class="p-4">Nombre Archivo</th>
+            <th class="p-4">Comentarios</th>
+            <th class="p-4">Tamaño</th>
+            <th class="p-4">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let archivo of archivos, let i = index">
+            <td class="p-2">{{ archivo?.nombreArchivo }}</td>
+            <td class="p-2">
+                <ng-container *ngIf="archivo?.comentarios; else sinComentarios">
+                    {{ archivo.comentarios }}
+                </ng-container>
+                <ng-template #sinComentarios>
+                    <i>Sin comentarios</i>
+                </ng-template>
+            </td>
+            <td class="p-2">{{ archivo?.tamano }}</td>
+            <td class="p-2">
+                <div class="flex justify-center items-center">
+                    <button (click)="eliminarArchivo(i)" type="button" class="p-3 text-white rounded-xl disabled:bg-gray-400 bg-gray-600 hover:bg-gray-700">
+                      <i class="fa-solid fa-trash-can"></i>
+                    </button>
+                </div>
+            </td>
+          </tr>
+      </table>
+  </div>
+</section>

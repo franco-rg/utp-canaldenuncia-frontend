@@ -1,0 +1,36 @@
+<section>
+  <h2 class="text-2xl font-semibold mb-6 text-gray-600">Finalizar Denuncia</h2>
+
+  <form [formGroup]="formFinalizarDenuncia">
+      <div class="mb-4">
+        <label class="block text-gray-700 font-medium mb-1">Comentarios adicionales</label>
+        <textarea formControlName="ComentariosAdicionales" rows="5" placeholder="Comentarios" class="w-full border p-2 rounded outline-none"></textarea>
+        <p class="text-gray-500 text-sm mt-1">
+            {{ formFinalizarDenuncia.controls['ComentariosAdicionales'].value?.length || "0" }}/4000 caracteres
+        </p>
+      </div>
+    
+      <p class="text-gray-600 text-sm mb-4">
+        En nuestra plataforma, la protección de tus datos personales es una prioridad. Al marcar las casillas correspondientes, estás dando tu consentimiento para que tratemos tus datos de acuerdo con nuestras políticas de privacidad.
+      </p>
+    
+      <div class="mb-4">
+        <label class="flex items-center mb-2">
+          <input type="checkbox" formControlName="PoliticaPrivacidad" class="mr-2">
+          <span class="text-gray-700">Al hacer clic en la casilla acepto la <a  href="https://ccfirma.com/wp-content/uploads/2024/09/Poliitica-de-Privacidad-CA__2024.pdf" 
+            target="_blank"
+            class="text-blue-600 font-semibold">Política de privacidad</a> del Canal Denuncias.</span>
+        </label>
+    
+        <label class="flex items-center">
+          <input type="checkbox" formControlName="TerminosCondiciones" class="mr-2">
+          <span class="text-gray-700">Al pulsar sobre el botón Enviar usted acepta los <a href="#" target="_blank"
+            class="text-blue-600 font-semibold">términos y condiciones de uso</a> del Canal Denuncias.</span>
+        </label>
+      </div>
+    
+      <p class="text-gray-600 text-sm mt-4">
+        Sus datos serán utilizados con la finalidad exclusiva de gestionar la comunicación. El responsable del tratamiento de los datos es la propia entidad, quien tratará los datos en cumplimiento de la normativa aplicable. Tiene derecho a acceder, rectificar, cancelar, suprimir, así como otros derechos detallados en la Política de Privacidad que puede consultar en la última pantalla del presente formulario.
+      </p>
+  </form>
+</section>

@@ -1,0 +1,60 @@
+<div *ngIf="show" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white p-6 rounded-lg shadow-md w-full max-w-md">
+        <h2 class="text-xl font-semibold mb-4">Editar Equipo Gestor</h2>
+
+        <form [formGroup]="form" (ngSubmit)="enviar()" class="space-y-4 row">
+            <div class="col-span-12">
+                <label class="block text-sm font-medium">Usuario <span class="text-red-500">*</span></label>
+                <select 
+                [disabled]="true"
+                formControlName="IDUSER" class="w-full border p-2 rounded">
+                    <option value="">-- Seleccione</option>
+                    <option *ngFor="let usuario of usuarios" [value]="usuario.id">{{ usuario.label }}</option>
+                </select>
+                <div *ngIf="form.get('IDUSER')?.invalid && form.get('IDUSER')?.touched" class="text-red-500 text-sm">
+                    El usuario es requerido
+                </div>
+            </div>
+
+            <div class="col-span-12">
+                <label class="block text-sm font-medium">Rol <span class="text-red-500">*</span></label>
+                <select formControlName="IDROL" class="w-full border p-2 rounded">
+                    <option value="">-- Seleccione</option>
+                    <option *ngFor="let rol of roles" [value]="rol.id">{{ rol.label }}</option>
+                </select>
+                <div *ngIf="form.get('IDROL')?.invalid && form.get('IDROL')?.touched" class="text-red-500 text-sm">
+                    El rol es requerido
+                </div>
+            </div>
+
+            <div class="col-span-12">
+                <label class="inline-flex items-center cursor-pointer">
+                    <input type="checkbox" formControlName="PRINCIPAL" class="sr-only peer" />
+                    <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-blue-500 
+                           rounded-full peer peer-checked:bg-blue-600 relative transition-all duration-300">
+                        <div class="absolute top-0.5 left-0.5 bg-white w-5 h-5 rounded-full 
+                             transition-transform duration-300 peer-checked:translate-x-5">
+                        </div>
+                    </div>
+                    <span class="ml-3 text-sm text-gray-700">Receptor Principal</span>
+                </label>
+            </div>
+
+            <div class="col-span-12">
+                <label class="block text-sm font-medium">Estado</label>
+                <select formControlName="CESTDO" class="w-full border p-2 rounded">
+                    <option value="A">Activo</option>
+                    <option value="I">Inactivo</option>
+                </select>
+            </div>
+            
+            <div class="flex justify-end gap-2 mt-4">
+                <button type="button" (click)="cerrar()"
+                    class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">Cancelar</button>
+                <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Enviar</button>
+            </div>
+        </form>
+
+        <app-loader *ngIf="loading"></app-loader>
+    </div>
+</div>

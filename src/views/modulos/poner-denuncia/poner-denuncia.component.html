@@ -1,0 +1,58 @@
+<app-loader *ngIf="loading"></app-loader>
+<section class="pt-6">
+    <div class="w-11/12 sm:w-3/4 lg:pl-6 m-auto">
+        <h2 class="font-bold text-xl">Poner denuncia</h2>
+        <nav class="flex items-center space-x-2 text-gray-600 text-sm flex-wrap">
+            <ng-container *ngFor="let item of breadcrumb; let last = last">
+                <div class="flex items-center">
+                    <a *ngIf="!last" href="#" (click)="confirmExit($event, item.url)" class="hover:text-orange-600 font-medium">
+                        {{ item.label }}
+                    </a>
+                    <span *ngIf="last" class="text-gray-500 font-semibold">{{ item.label }}</span>
+                    <span *ngIf="!last" class="mx-2 text-gray-400">/</span>
+                </div>
+            </ng-container>
+        </nav>
+    </div>
+
+    <div class="flex flex-col lg:flex-row justify-center items-center lg:items-start gap-4 relative mt-6">
+        <div class="w-full sm:w-3/4 lg:w-1/4">
+            <ul>
+                <li *ngFor="let step of steps; let i = index" class="mb-3">
+                    <button 
+                        class="flex items-center space-x-2 w-full py-2.5 px-5 rounded-2xl cursor-default text-bold"
+                        [class.bg-orange-50]="i === currentStepIndex"
+                        [class.color-panton-orange]="i === currentStepIndex"
+                        [style]="i === currentStepIndex ? 'font-weight: bold !important' : ''"
+                    >
+                        <span class="w-8 h-8 flex items-center justify-center rounded-full" 
+                              [class.bg-gray-100]="i !== currentStepIndex"
+                              [class.background-panton-orange]="i === currentStepIndex"
+                              [class.text-white]="i === currentStepIndex">
+                            {{ i + 1 }}
+                        </span>
+                        <span class="pl-2">{{ step.label }}</span>
+                    </button>
+                </li>
+            </ul>
+        </div>
+
+        <div class="w-full sm:w-3/4 lg:w-2/4 px-6 mb-10">
+            <router-outlet></router-outlet>
+            <div class="flex justify-center lg:justify-end gap-4 mt-4">
+                <button type="button" class="px-4 py-2 bg-gray-300 text-gray-700 rounded-xl"
+                        (click)="goToPrevious()"
+                        [disabled]="currentStepIndex === 0">
+                    <i class="fa-solid fa-caret-left"></i>
+                    Anterior
+                </button>
+                <button type="button" class="disabled:cursor-not-allowed px-4 py-2 background-panton-orange text-white rounded-xl"
+                        (click)="goToNext()"
+                        [disabled]="isNextDisabled()">
+                    {{ currentStepIndex === steps.length - 1 ? 'Enviar' : 'Siguiente' }}
+                    <i *ngIf="currentStepIndex !== steps.length - 1" class="fa-solid fa-caret-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,40 @@
+<div class="w-full px-4 py-6">
+  <app-loader *ngIf="loading"></app-loader>
+
+  <div class="grid grid-cols-1 gap-6">
+    <!-- Gráfico de barras -->
+    <div class="bg-white rounded-2xl shadow p-4">
+      <h2 class="text-lg font-semibold text-gray-800 mb-4">Denuncias por Fase</h2>
+      <ngx-charts-bar-vertical
+        [view]="view"
+        [scheme]="colorScheme"
+        [results]="chartData"
+        [gradient]="gradient"
+        [xAxis]="showXAxis"
+        [yAxis]="showYAxis"
+        [legend]="showLegend"
+        [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel"
+        xAxisLabel="Tipo de Denuncia"
+        legendTitle="Leyenda"
+        yAxisLabel="Repeticiones">
+      </ngx-charts-bar-vertical>
+    </div>
+
+    <!-- Gráfico de pastel -->
+    <div class="bg-white rounded-2xl shadow p-4">
+      <h2 class="text-lg font-semibold text-gray-800 mb-4">Denuncias por Tipo</h2>
+      <ngx-charts-pie-chart
+        [view]="view"
+        [scheme]="colorScheme"
+        legendTitle="Leyenda"
+        [results]="pastelData"
+        [gradient]="gradient"
+        [legend]="showLegend"
+        [doughnut]="isDoughnut"
+        [labels]="showLabels"
+        [explodeSlices]="explodeSlices">
+      </ngx-charts-pie-chart>
+    </div>
+  </div>
+</div>

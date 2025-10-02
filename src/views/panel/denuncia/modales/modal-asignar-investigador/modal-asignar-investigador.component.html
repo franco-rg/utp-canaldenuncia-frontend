@@ -1,0 +1,51 @@
+<div *ngIf="show" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white p-6 rounded-lg shadow-md w-full max-w-md">
+        <h2 class="text-xl font-semibold mb-4">Asignar Investigador</h2>
+
+        <form [formGroup]="form" (ngSubmit)="enviar()" class="space-y-4 row">
+            <div class="col-span-12">
+                <label class="block text-sm font-medium">Investigador <span class="text-red-500">*</span></label>
+                <select formControlName="IDREP" class="w-full border p-2 rounded">
+                    <option selected value="">-- Seleccione</option>
+                    <option *ngFor="let investigador of receptores" [value]="investigador.id">{{ investigador.ncmpto }}</option>
+                </select>
+                <div *ngIf="form.get('IDREP')?.invalid && form.get('IDREP')?.touched" class="text-red-500 text-sm">
+                    Campo requerido
+                </div>
+            </div>
+
+            <!-- // input NUMBER FASE DE INVESTIGACIÓN , PLAZO FASE DECISOR, PLAZO FASE COMPLIANCE TODOS OBLIGATORIOS -->
+            <div class="col-span-12">
+                <label class="block text-sm font-medium">Plazo Fase Investigación <span class="text-red-500">*</span></label>
+                <input type="number" formControlName="DSFSINVSTGDR" class="w-full border p-2 rounded" placeholder="Ingrese tiempo de la fase de investigación" />
+                <div *ngIf="form.get('DSFSINVSTGDR')?.invalid && form.get('DSFSINVSTGDR')?.touched" class="text-red-500 text-sm">
+                    Campo requerido
+                </div>
+            </div>
+
+            <div class="col-span-12">
+                <label class="block text-sm font-medium">Plazo Fase Decisor <span class="text-red-500">*</span></label>
+                <input type="number" formControlName="DSFSDCSR" class="w-full border p-2 rounded" placeholder="Ingrese tiempo de la fase decisor" />
+                <div *ngIf="form.get('DSFSDCSR')?.invalid && form.get('DSFSDCSR')?.touched" class="text-red-500 text-sm">
+                    Campo requerido
+                </div>
+            </div>
+
+            <div class="col-span-12">
+                <label class="block text-sm font-medium">Plazo Fase Compliance <span class="text-red-500">*</span></label>
+                <input type="number" formControlName="DSFSCRRE" class="w-full border p-2 rounded" placeholder="Ingrese tiempo de la fase compliance" />
+                <div *ngIf="form.get('DSFSCRRE')?.invalid && form.get('DSFSCRRE')?.touched" class="text-red-500 text-sm">
+                    Campo requerido
+                </div>
+            </div>
+
+            <div class="flex justify-end gap-2 mt-4">
+                <button type="button" (click)="cerrar()"
+                    class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">Cancelar</button>
+                <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Guardar</button>
+            </div>
+        </form>
+
+        <app-loader *ngIf="loading"></app-loader>
+    </div>
+</div>

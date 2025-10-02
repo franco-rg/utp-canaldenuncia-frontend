@@ -1,0 +1,48 @@
+<section>
+  <h2 class="text-2xl font-semibold mb-6 text-gray-600">
+    Datos de la denuncia
+  </h2>
+
+  <form [formGroup]="formDatosDenuncia" class="space-y-6">
+    <div>
+      <label class="block text-gray-700 font-medium mb-1">Fecha de la incidencia <span
+          class="text-red-500">*</span></label>
+      <input type="date" [max]="maxDate" formControlName="FechaIncidencia"
+        class="w-full border p-2 rounded outline-none">
+    </div>
+
+    <div>
+      <label class="block text-gray-700 font-medium mb-1">Descripción <span class="text-red-500">*</span></label>
+      <div class="relative">
+        <textarea formControlName="DescripcionDenuncia" rows="5"
+          class="w-full border p-2 rounded outline-none"></textarea>
+        <button type="button" (click)="toggleRecording()" [class.bg-green-600]="recording"
+          [class.text-white]="recording" [class.bg-red-400]="!recording"
+          class="absolute right-0 bottom-0 px-3.5 p-2 rounded-full shadow-lg transition">
+          <i class="fa-solid fa-microphone"></i>
+        </button>
+      </div>
+
+      <div class="flex justify-between items-center">
+        <p class="text-gray-500 text-sm mt-1">
+          {{ formDatosDenuncia.controls['DescripcionDenuncia'].value?.length || "0" }}/4000 caracteres
+        </p>
+        <i *ngIf="recording" class="text-sm text-green-500 mt-2">Escuchando...</i>
+      </div>
+    </div>
+    <div>
+      <p class="text-gray-700 text-sm">
+        Cuéntanos con detalle tu inquietud o sugerencia</p>
+      <p class="text-gray-700 text-sm">
+
+        Por favor, describe de manera específica el asunto que deseas reportar. Incluye toda la información relevante: nombres de personas o áreas involucradas, documentos, políticas, fechas, horarios o lugares, si los conoces.
+
+      </p>
+    </div>
+    <div>
+      <p class="text-gray-700 text-sm">
+        Si lo prefieres, puedes grabar un audio haciendo clic en el ícono del micrófono rojo en la esquina inferior derecha. También puedes escribir directamente en este espacio.
+      </p>
+    </div>
+  </form>
+</section>

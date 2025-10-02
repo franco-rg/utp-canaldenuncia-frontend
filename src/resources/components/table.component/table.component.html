@@ -1,0 +1,72 @@
+<!-- Tabla -->
+<div class="overflow-x-auto">
+  <app-loader *ngIf="loading"></app-loader>
+
+  <table class="min-w-full table-auto bg-white shadow-md rounded-lg border-collapse">
+    <thead>
+      <tr class="bg-gray-100 text-gray-700">
+        <th *ngFor="let column of displayedColumns" class="px-4 py-2 text-left font-semibold">{{ column.title }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of data" class="border-b text-xs" [ngClass]="{ 'bg-gray-50': item.html }">
+        <td *ngFor="let column of displayedColumns" class="px-4 py-2 text-left" [ngClass]="column.class"
+          [ngStyle]="{ 'width': column.style }">
+
+          <!-- Si la columna es "acciones", renderizar botones -->
+          <ng-container *ngIf="column.keyof === 'acciones'; else defaultColumn">
+            <div class="flex items-center space-x-2">
+              <ng-container *ngFor="let action of getActions(item[column.keyof])">
+                <button class="px-2 py-1 rounded text-white" [ngClass]="action.color"
+                  [title]="action.tooltip" (click)="action.action()">
+                  <i [class]="'fas fa-' + action.icon"></i>
+                </button>
+              </ng-container>
+            </div>
+          </ng-container>
+
+          <!-- Para otras columnas, usar texto o HTML si es necesario -->
+          <ng-template #defaultColumn>
+            <span *ngIf="!column.html">{{ item[column.keyof] }}</span>
+            <span *ngIf="column.html" [innerHTML]="item[column.keyof]"></span>
+          </ng-template>
+
+        </td>
+      </tr>
+
+      <!-- // si no hay datos, mostrar un mensaje -->
+      <tr *ngIf="data.length === 0" class="text-center text-gray-500">
+        <td [attr.colspan]="displayedColumns.length" class="pt-4 text-center text-gray-500  text-xs font-semibold">
+          <i class="fa-solid fa-circle-exclamation"></i>
+          <span class="pl-2 text-gray-500">No hay datos disponibles</span>
+        </td>
+      </tr>
+
+    </tbody>
+
+  </table>
+</div>
+
+<!-- Paginación -->
+<div class="flex items-center justify-center mt-4">
+  <button (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 1"
+    class="px-4 py-2 bg-blue-500 text-white rounded-lg disabled:opacity-50 hover:bg-blue-700">
+    <i class="fa-solid fa-angle-left"></i>
+  </button>
+
+  <!-- Botones de numeración -->
+  <div class="flex items-center space-x-2">
+    <button *ngFor="let page of getPageNumbers()" (click)="onPageChange(page)"
+      [class.bg-blue-700]="page === currentPage" [class.text-white]="page === currentPage"
+      [class.font-bold]="page === currentPage"
+      class="px-4 py-2 bg-blue-200 text-gray-800 rounded-lg hover:bg-blue-500 hover:text-white">
+      {{ page }}
+    </button>
+  </div>
+
+
+  <button (click)="onPageChange(currentPage + 1)" [disabled]="currentPage * pageSize >= totalItems"
+    class="px-4 py-2 bg-blue-500 text-white rounded-lg disabled:opacity-50 hover:bg-blue-700">
+    <i class="fa-solid fa-angle-right"></i>
+  </button>
+</div>

@@ -1,0 +1,65 @@
+<section class="min-h-screen flex flex-col justify-center items-center bg-gray-50 px-4 py-8">
+  <!-- Breadcrumb y Título -->
+  <div class="w-full max-w-4xl mb-6">
+    <h2 class="font-bold text-2xl text-gray-800 mb-2">Módulos
+    </h2>
+    <nav class="flex flex-wrap items-center text-sm text-gray-500 space-x-1">
+      <ng-container *ngFor="let item of breadcrumb; let last = last">
+        <div class="flex items-center">
+          <a *ngIf="!last" [routerLink]="item.url" class="hover:text-orange-600 font-medium">
+            {{ item.label }}
+          </a>
+          <span *ngIf="last" class="font-semibold text-gray-700">{{ item.label }}</span>
+          <span *ngIf="!last" class="mx-2 text-gray-400">/</span>
+        </div>
+      </ng-container>
+    </nav>
+  </div>
+
+  <!-- Logo -->
+  <img src="../../../assets/img/logo-caro-asociados.png" alt="Logo Caro Asociados" class="h-16 mb-6" />
+
+  <!-- Formulario -->
+  <div class="w-full max-w-md bg-white shadow-2xl rounded-2xl px-8 py-10">
+    <h2 class="text-center text-2xl font-bold text-orange-500 mb-6">
+      Iniciar Sesión
+    </h2>
+
+    <form [formGroup]="loginForm" class="space-y-6">
+      <!-- Correo -->
+      <div>
+        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">
+          Correo Electrónico
+        </label>
+        <input
+          type="email"
+          id="email"
+          formControlName="Correo"
+          class="w-full rounded-md bg-gray-100 border border-gray-300 p-3 text-gray-600 focus:ring-2 focus:ring-orange-400 focus:outline-none transition"
+        />
+      </div>
+
+      <!-- Contraseña -->
+      <div>
+        <label for="password" class="block text-sm font-medium text-gray-700 mb-1">
+          Contraseña
+        </label>
+        <input
+          type="password"
+          id="password"
+          formControlName="Contrasena"
+          class="w-full rounded-md bg-gray-100 border border-gray-300 p-3 text-gray-600 focus:ring-2 focus:ring-orange-400 focus:outline-none transition"
+        />
+      </div>
+
+      <!-- Botón -->
+      <button
+        (click)="login()"
+        type="submit"
+        class="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 rounded-lg transition-all shadow-sm"
+      >
+        Ingresar
+      </button>
+    </form>
+  </div>
+</section>

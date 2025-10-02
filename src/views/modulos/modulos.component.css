@@ -1,0 +1,36 @@
+.section-modulos{
+    background-image: url('https://canaletico.caroasociados.pe/uploads/section-modulos.jpg');
+    background-size: cover;
+    background-position: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    background-repeat: no-repeat;
+    height: 100vh;
+}
+
+.shadow-beautiful{
+    box-shadow: 5px 10px 20px rgb(255, 255, 255);
+    -webkit-backdrop-filter: blur(5px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.rounded-button{
+    border-radius: 50px;
+    display: grid;
+    grid-template-columns: 2fr 5fr;
+    align-items: start;
+    justify-items: center;
+    cursor: pointer;
+}
+
+.rounded-button div img{
+    width: 300px;
+    height: 100px;
+}
+
+.rounded-button:hover{
+    background-color: rgb(226, 226, 226);
+    color: white !important;
+}

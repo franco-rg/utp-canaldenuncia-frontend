@@ -1,0 +1,431 @@
+<section class="pt-6 bg-gray-50">
+    <div class="w-11/12 sm:w-3/4 lg:pl-6 m-auto">
+        <h2 class="font-bold text-xl">Módulos</h2>
+        <nav class="flex items-center space-x-2 text-gray-600 text-sm flex-wrap">
+            <ng-container *ngFor="let item of breadcrumb; let last = last">
+                <div class="flex items-center">
+                    <a *ngIf="!last" [routerLink]="item.url" class="hover:text-orange-600 font-medium">
+                        {{ item.label }}
+                    </a>
+                    <span *ngIf="last" class="text-gray-500 font-semibold">{{ item.label }}</span>
+                    <span *ngIf="!last" class="mx-2 text-gray-400">/</span>
+                </div>
+            </ng-container>
+        </nav>
+    </div>
+    <app-loader *ngIf="loading"></app-loader>
+
+    <div *ngIf="!isDenunciaOk" class="flex flex-col justify-center items-center min-h-screen px-4 py-8">
+        <img src="../../../assets/img/logo-caro-asociados.png" alt="Logo" class="h-16 mb-4">
+        <div class="w-full max-w-xl bg-white rounded-2xl shadow-lg p-8 space-y-6">
+          <div class="text-center">
+            <h2 class="text-2xl font-bold text-gray-800">
+              Inicia sesión para acceder a los datos de tu comunicación.
+            </h2>
+          </div>
+      
+          <form [formGroup]="formLogin" class="space-y-6">
+            <!-- Código -->
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">
+                * Identificador de la denuncia:
+              </label>
+              <input type="text" formControlName="CODIGO"
+                class="w-full px-4 py-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition duration-150">
+            </div>
+      
+            <!-- Contraseña -->
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">
+                * Contraseña:
+              </label>
+              <div class="relative">
+                <input [type]="showPassword ? 'text' : 'password'" formControlName="CONTRASENA"
+                  class="w-full px-4 py-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition duration-150 pr-12">
+                <button type="button" (click)="showPassword = !showPassword"
+                  class="absolute inset-y-0 right-3 flex items-center text-gray-400 hover:text-gray-700">
+                  <svg *ngIf="!showPassword" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none"
+                    viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0zm-7.5 3.5A7.963 7.963 0 015 12c0-1.657.64-3.165 1.5-4.5m11 0A7.963 7.963 0 0119 12c0 1.657-.64 3.165-1.5 4.5M21 21l-6-6m-9 0l-6 6" />
+                  </svg>
+                  <svg *ngIf="showPassword" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none"
+                    viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M3 3l18 18m-9-4a3 3 0 110-6 3 3 0 010 6zm-7.5 3.5A7.963 7.963 0 015 12c0-1.657.64-3.165 1.5-4.5M19 12c0 1.657-.64 3.165-1.5 4.5" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+      
+            <!-- Botón -->
+            <div>
+              <button (click)="onValidateDenuncia()"
+                class="w-full background-panton-orange text-white font-semibold py-3 rounded-xl shadow-md transition duration-300">
+                ENVIAR
+              </button>
+            </div>
+          </form>
+      
+          <!-- Futuro link recuperación contraseña -->
+          <div class="text-center text-sm text-gray-500">
+            <!-- <a href="#" class="text-orange-500 hover:underline">Recuperar contraseña</a> -->
+          </div>
+        </div>
+      </div>
+      
+
+
+    <div *ngIf="isDenunciaOk" class="w-full sm:w-3/4 lg:w-3/4 mx-auto mt-6 relative px-3 md:px-0">
+        <button (click)="logout()"
+            class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 shadow-md">
+            🚪 Cerrar Sesión
+        </button>
+
+        <!-- TITLE -->
+        <div class="bg-white shadow-lg rounded-xl p-6 mt-6">
+            <h2 class="text-gray-800 text-xl font-bold flex items-center">
+                <span class="mr-2 text-orange-500">📌</span> Denuncia N° <span class="font-medium">&nbsp;{{ denuncia.id
+                    }}</span>
+            </h2>
+
+            <h4 class="text-gray-800 text-sm font-semibold flex items-center mt-4">
+                <span class="mr-2 text-orange-500">📊</span> Fase Actual
+                <span class="font-medium">&nbsp;{{ denuncia.dgddenuncia }}</span>
+            </h4>
+
+            <div class="w-full bg-gray-300 rounded-full h-3 mt-4">
+                <div class="bg-orange-500 h-3 rounded-full transition-all ease-in-out duration-500"
+                    [ngStyle]="{ width: getGrupoDato('GDDENUNCIA', denuncia.gddenuncia) + '%' }">
+                </div>
+            </div>
+
+        </div>
+
+        <!-- // DATOS -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+            <div class="bg-white shadow-lg rounded-xl p-6">
+                <h3 class="text-gray-800 text-lg font-semibold flex items-center">
+                    <span class="mr-2 text-blue-500">👤</span> Datos del Denunciante
+                </h3>
+
+                <p class="text-gray-600 mt-2"><span class="font-medium font-semibold">Relación:</span> {{
+                    denuncia.didrempresa }}</p>
+                <div *ngIf="!denuncia.nombres && !denuncia.correo && !denuncia.telefono && !denuncia.apellidos">
+                    <p class="text-gray-600 italic">Denuncia anónima.</p>
+                </div>
+                <div *ngIf="denuncia.nombres || denuncia.correo || denuncia.telefono || denuncia.apellidos">
+                    <p class="text-gray-600"><span class="font-medium font-semibold">Nombre:</span>&nbsp;<span
+                            class="font-medium">{{ denuncia.nombres }} {{ denuncia.apellidos }}</span></p>
+                    <p class="text-gray-600"><span class="font-medium font-semibold">Correo:</span>&nbsp;<span
+                            class="font-medium">{{ denuncia.correo }}</span></p>
+                    <p class="text-gray-600"><span class="font-medium font-semibold">Teléfono:</span>&nbsp;<span
+                            class="font-medium">{{ denuncia.telefono }}</span></p>
+                </div>
+            </div>
+
+            <div class="bg-white shadow-lg rounded-xl p-6">
+                <h3 class="text-gray-800 text-lg font-semibold flex items-center">
+                    <span class="mr-2 text-red-500">⚠️</span> Datos de la Denuncia
+                </h3>
+                <p class="text-gray-600 mt-2"><span class="font-medium font-semibold">Empresa:</span>&nbsp;<span
+                        class="font-medium">{{ denuncia.mrca }}</span></p>
+                <p class="text-gray-600"><span class="font-medium font-semibold">Tipo de denuncia:</span>&nbsp;<span
+                        class="font-medium">{{ denuncia.didtpodenuncia }}</span></p>
+                <p class="text-gray-600"><span class="font-medium font-semibold">Fecha de denuncia:</span>&nbsp;<span
+                        class="font-medium">{{ denuncia.fechainc | date: 'dd/MM/yyyy' }}</span></p>
+                <p class="text-gray-600"><span class="font-medium font-semibold">Inicio Trámite:</span>&nbsp;<span
+                        class="font-medium">{{ denuncia.fcrcn | date: 'dd/MM/yyyy' }}</span></p>
+                <p class="text-gray-600"><span class="font-medium font-semibold">Fin Trámite:</span>&nbsp;<span
+                        class="font-medium">---</span></p>
+            </div>
+        </div>
+
+        <!-- // INFORMACION DE LA DENUNCIA -->
+        <div class="bg-white shadow-lg rounded-xl p-6 mt-6">
+            <h3 class="text-gray-800 text-lg font-semibold flex items-center">
+                <span class="mr-2 text-green-500">📝</span> Descripción de la denuncia
+            </h3>
+            <p class="text-gray-600 mt-2">{{ denuncia.detalle }}</p>
+
+            <h3 class="mt-3 text-gray-800 text-lg font-semibold flex items-center">
+                <span class="mr-2 text-purple-500">💬</span> Comentario adicional
+            </h3>
+            <p class="text-gray-600 mt-2">{{ denuncia.comentarioadi }}</p>
+        </div>
+
+        <!-- // ACCIONES -->
+        <div *ngIf="getValidador('1')" class="bg-white shadow-lg rounded-xl p-6 mt-6">
+            <h3 class="text-gray-800 text-lg font-semibold flex items-center">
+                <span class="mr-2 text-indigo-500">📎</span> Acciones
+            </h3>
+            <div class="overflow-x-auto mt-4">
+
+                <table class="w-full mt-4 border border-gray-300 rounded-lg overflow-hidden">
+                    <thead class="bg-gray-100 text-gray-700 uppercase text-sm font-semibold">
+                        <tr>
+                            <th class="px-4 py-3">#</th>
+                            <th class="px-4 py-3">Nombre Acción</th>
+                            <th class="px-4 py-3">Responsable</th>
+                            <th class="px-4 py-3">Estado</th>
+                            <th class="px-4 py-3">Comentario</th>
+                            <th class="px-4 py-3">Fecha</th>
+                            <th class="px-4 py-3">Usuario</th>
+                            <th class="px-4 py-3">Completado</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-300">
+                        <ng-container *ngIf="denuncia.jsoN_ACCIONES?.length > 0; else sinAcciones">
+                            <tr *ngFor="let accion of denuncia.jsoN_ACCIONES; let i = index" class="hover:bg-gray-50">
+                                <td class="px-4 py-3 text-center">{{ i + 1 }}</td>
+                                <td class="px-4 py-3">{{ accion.NOMBRE }}</td>
+                                <td class="px-4 py-3">{{ accion.CONTACTO }}</td>
+                                <td class="px-4 py-3">{{ accion.RESUELTO ? 'Completado' : 'Pendiente' }}</td>
+                                <td class="px-4 py-3">{{ accion.DESCRIPCION }}</td>
+                                <td class="px-4 py-3">{{ accion.FCRCN | date: 'dd/MM/yyyy' }}</td>
+                                <td class="px-4 py-3">{{ accion.UEDCN }}</td>
+                                <td class="px-4 py-3 text-center">
+                                    <span *ngIf="!accion.RESUELTO" class="text-red-500">
+                                        <i class="fas fa-times"></i>
+                                    </span>
+                                    <span *ngIf="accion.RESUELTO" class="text-green-500">
+                                        <i class="fas fa-check"></i>
+                                    </span>
+                                </td>
+                            </tr>
+                        </ng-container>
+
+                        <ng-template #sinAcciones>
+                            <tr class="hover:bg-gray-50">
+                                <td colspan="8" class="px-4 py-3 text-center">No hay acciones registradas.</td>
+                            </tr>
+                        </ng-template>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- // HISTORIAL DE USUARIOS -->
+        <div *ngIf="getValidador('2')" class="bg-white shadow-lg rounded-xl p-6 mt-6">
+            <h3 class="text-gray-800 text-lg font-semibold flex items-center">
+                <span class="mr-2 text-indigo-500">📎</span> Historial de Usuarios
+            </h3>
+            <div class="overflow-x-auto mt-4">
+
+                <table class="w-full mt-4 border border-gray-300 rounded-lg overflow-hidden">
+                    <thead class="bg-gray-100 text-gray-700 uppercase text-sm font-semibold">
+                        <tr>
+                            <th class="px-4 py-3">#</th>
+                            <th class="px-4 py-3">Nombre</th>
+                            <th class="px-4 py-3">Correo</th>
+                            <th class="px-4 py-3">Rol</th>
+                            <th class="px-4 py-3">Fecha</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-300">
+                        <ng-container *ngIf="denuncia.jsoN_USUARIOS?.length > 0; else sinUsuarios">
+                            <tr *ngFor="let usuario of denuncia.jsoN_USUARIOS; let i = index" class="hover:bg-gray-50">
+                                <td class="px-4 py-3 text-center">{{ i + 1 }}</td>
+                                <td class="px-4 py-3">{{ usuario.USUARIO }}</td>
+                                <td class="px-4 py-3">{{ usuario.CORREO }}</td>
+                                <td class="px-4 py-3">{{ usuario.ROL }}</td>
+                                <td class="px-4 py-3">{{ usuario.FCRCN | date: 'dd/MM/yyyy' }}</td>
+                            </tr>
+                        </ng-container>
+                        
+                        <ng-template #sinUsuarios>
+                            <tr class="hover:bg-gray-50">
+                                <td colspan="5" class="px-4 py-3 text-center">No hay usuarios registrados.</td>
+                            </tr>
+                        </ng-template>
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- // ARCHIVOS ADJUNTOS -->
+        <div *ngIf="getValidador('3')" class="bg-white shadow-lg rounded-xl p-6 mt-6">
+            <h3 class="text-gray-800 text-lg font-semibold flex items-center">
+                <span class="mr-2 text-indigo-500">📎</span> Adjuntos
+            </h3>
+            <div class="overflow-x-auto mt-4">
+
+                <table class="w-full mt-4 border border-gray-300 rounded-lg overflow-hidden">
+                    <thead class="bg-gray-100 text-gray-700 uppercase text-sm font-semibold">
+                        <tr>
+                            <th class="px-4 py-3">#</th>
+                            <th class="px-4 py-3">Archivo</th>
+                            <th class="px-4 py-3">Comentario</th>
+                            <th class="px-4 py-3">Usuario</th>
+                            <th class="px-4 py-3">Fecha</th>
+                            <th class="px-4 py-3">Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-300">
+                        <ng-container *ngIf="denuncia.documentos?.length > 0; else sinAdjuntos">
+                            <tr *ngFor="let adjunto of denuncia.documentos; let i = index" class="hover:bg-gray-50">
+                                <td class="px-4 py-3 text-center">{{ i + 1 }}</td>
+                                <td class="px-4 py-3">{{ adjunto.narchivo }}</td>
+                                <td class="px-4 py-3">{{ adjunto.comentarios }}</td>
+                                <td class="px-4 py-3">{{ adjunto.ucrcn }}</td>
+                                <td class="px-4 py-3">{{ adjunto.fcrcn | date: 'dd/MM/yyyy' }}</td>
+                                <td class="px-4 py-3 text-center">
+                                    <a href="{{ adjunto.ruta }}" target="_blank" class="text-blue-500 hover:underline">
+                                        <i class="fas fa-download"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </ng-container>
+                        
+                        <ng-template #sinAdjuntos>
+                            <tr class="hover:bg-gray-50">
+                                <td colspan="6" class="px-4 py-3 text-center">No hay documentos adjuntos.</td>
+                            </tr>
+                        </ng-template>
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- TESTIGOS -->
+        <div *ngIf="getValidador('4')" class="bg-white shadow-lg rounded-xl p-6 mt-6">
+            <h3 class="text-gray-800 text-lg font-semibold flex items-center">
+                <span class="mr-2 text-yellow-500">👥</span> Testigos
+            </h3>
+            <div class="overflow-x-auto mt-4">
+
+                <table class="w-full mt-4 border border-gray-300 rounded-lg overflow-hidden">
+                    <thead class="bg-gray-100 text-gray-700 uppercase text-sm font-semibold">
+                        <tr>
+                            <th class="px-4 py-3">#</th>
+                            <th class="px-4 py-3">Nombre</th>
+                            <th class="px-4 py-3">Correo</th>
+                            <th class="px-4 py-3">Teléfono</th>
+                            <th class="px-4 py-3">Comentario</th>
+                            <th class="px-4 py-3">Usuario</th>
+                            <th class="px-4 py-3">Fecha</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-300">
+                        <ng-container *ngIf="denuncia.testigos.length > 0; else sinTestigos">
+                            <tr *ngFor="let testigo of denuncia.testigos; let i = index" class="hover:bg-gray-50">
+                                <td class="px-4 py-3 text-center">{{ i + 1 }}</td>
+                                <td class="px-4 py-3">{{ testigo.nombre }} {{ testigo.apellido }}</td>
+                                <td class="px-4 py-3">{{ testigo.correo }}</td>
+                                <td class="px-4 py-3">{{ testigo.telefono }}</td>
+                                <td class="px-4 py-3">{{ testigo.comentarios }}</td>
+                                <td class="px-4 py-3">{{ testigo.ucrcn }}</td>
+                                <td class="px-4 py-3">{{ testigo.fcrcn | date: 'dd/MM/yyyy' }}</td>
+                            </tr>
+                        </ng-container>
+
+                        <ng-template #sinTestigos>
+                            <tr class="hover:bg-gray-50">
+                                <td colspan="7" class="px-4 py-3 text-center">No hay testigos registrados.</td>
+                            </tr>
+                        </ng-template>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- // MEDIDA CAUTELAR -->
+        <div *ngIf="getValidador('5')" class="bg-white shadow-lg rounded-xl p-6 mt-6">
+            <h3 class="text-gray-800 text-lg font-semibold flex items-center">
+                <span class="mr-2 text-green-500">📝</span> Medida Cautelar
+            </h3>
+            <p class="text-gray-600 mt-2">{{ denuncia.detalle }}</p>
+        </div>
+
+        <!-- // CAMBIO GESTOR DE DENUNCAI -->
+        <div *ngIf="getValidador('6')" class="bg-white shadow-lg rounded-xl p-6 mt-6">
+            <h3 class="text-gray-800 text-lg font-semibold flex items-center">
+                <span class="mr-2 text-green-500">🔄</span> Cambio Gestor de Denuncia
+            </h3>
+            <p class="text-gray-600 mt-2">{{ denuncia.detalle }}</p>
+        </div>
+
+        <!-- // INFORME FINAL DEL INVESTIGADOR -->
+        <div *ngIf="getValidador('7')" class="bg-white shadow-lg rounded-xl p-6 mt-6">
+            <h3 class="text-gray-800 text-lg font-semibold flex items-center">
+                <span class="mr-2 text-green-500">📋</span> Informe Final del Investigador
+            </h3>
+            <p class="text-gray-600 mt-2">{{ denuncia.iformeinv }}</p>
+        </div>
+
+        <!-- // INFORME FINAL DEL DECISOR -->
+        <div *ngIf="getValidador('8')" class="bg-white shadow-lg rounded-xl p-6 mt-6">
+            <h3 class="text-gray-800 text-lg font-semibold flex items-center">
+                <span class="mr-2 text-green-500">📋</span> Informe Final del Decisor
+            </h3>
+            <p class="text-gray-600 mt-2">{{ denuncia.iformedec }}</p>
+        </div>
+
+        <!-- // INFORME FINAL DE COMPLIANCE -->
+        <div *ngIf="getValidador('9')" class="bg-white shadow-lg rounded-xl p-6 mt-6">
+            <h3 class="text-gray-800 text-lg font-semibold flex items-center">
+                <span class="mr-2 text-green-500">📋</span> Informe Final de Compliance
+            </h3>
+            <p class="text-gray-600 mt-2">{{ denuncia.iformecom }}</p>
+        </div>
+
+        <!-- // INFORME FINAL DEL DENUNCIANTE -->
+        <div *ngIf="getValidador('10')" class="bg-white shadow-lg rounded-xl p-6 mt-6">
+            <h3 class="text-gray-800 text-lg font-semibold flex items-center">
+                <span class="mr-2 text-green-500">📋</span> Informe Final del Denunciante
+            </h3>
+            <p class="text-gray-600 mt-2">{{ denuncia.iformeden }}</p>
+        </div>
+
+        <!-- // CHAT USUARIO 1 - RECEPTOR -->
+        <div *ngIf="getValidador('11')" class="bg-white shadow-lg rounded-xl p-6 mt-6">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-gray-800 text-lg font-semibold flex items-center">
+                    <span class="mr-2 text-green-500">💬</span> Chat
+                </h3>
+                <button (click)="sendMessage()"
+                    class="focus:outline-none font-bold text-white bg-orange-700 hover:bg-orange-800 rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-orange-500 dark:hover:bg-orange-600 transition-all">
+                    Agregar Mensaje
+                </button>
+            </div>
+            <div class="mx-auto p-2 bg-white rounded-lg h-[500px] overflow-y-auto">
+                <div *ngFor="let msg of denuncia['chat']">
+                    <div [ngClass]="{
+                                'text-right': denuncia['idact'] == msg.idreceptor || msg.tpo == currentUser,
+                                'text-left': denuncia['idact'] != msg.idreceptor && msg.tpo !== currentUser
+                              }" class="pt-2">
+                        <div [ngClass]="{
+                                  'bg-blue-500 text-white ml-auto':
+                                    denuncia['idact'] == msg.idreceptor || msg.tpo == currentUser,
+                                  'bg-gray-200 text-gray-800 mr-auto':
+                                    denuncia['idact'] != msg.idreceptor && msg.tpo !== currentUser
+                                }" class="inline-block px-4 py-2 rounded-lg max-w-[70%]">
+                            <span class="text-sm font-semibold block mb-1">
+                                {{ denuncia['idact'] == msg.idreceptor || currentUser ? 'Yo' : msg.usuario }}
+                            </span>
+                            <span>{{ msg.mensaje }}</span>
+                            <span class="text-xs block mt-1" [ngClass]="{
+                                    'text-white':
+                                      denuncia['idact'] == msg.idreceptor || msg.tpo == currentUser,
+                                    'text-gray-500':
+                                      denuncia['idact'] != msg.idreceptor && msg.tpo !== currentUser
+                                  }">
+                                {{ msg.fcrcn | date: 'dd/MM/yyyy HH:mm' }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-5">
+                    <input type="text" placeholder="Escribe un mensaje..." [(ngModel)]="newMessage"
+                        (keyup.enter)="sendMessage()" class="w-full p-2 border border-gray-300 rounded-lg" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
