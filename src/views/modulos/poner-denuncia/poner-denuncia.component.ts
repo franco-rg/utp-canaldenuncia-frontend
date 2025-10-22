@@ -102,7 +102,7 @@ export class PonerDenunciaComponent implements OnInit {
       const data = currentComponent.getFormData();
       this.formularioDenunciaService.setFormData(this.steps[this.currentStepIndex].path, data);
     }
-
+ 
     if (this.currentStepIndex < this.steps.length - 1) {
       this.router.navigate(['/modulos/poner-denuncia', this.steps[this.currentStepIndex + 1].path]);
     } else {
