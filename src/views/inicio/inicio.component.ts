@@ -19,7 +19,7 @@ export class InicioComponent implements OnInit, AfterViewInit, OnDestroy {
       question: '¿Qué es el canal de denuncias?',
       answer: `
       <p>
-      Es un medio de comunicación confidencial y seguro, disponible para empleados, colaboradores, clientes, proveedores y cualquier persona relacionada con Caro & Asociados, que permite reportar incidencias, conductas irregulares o dudas relacionadas con normas internas.'
+      Es un medio de comunicación confidencial y seguro, disponible para empleados, colaboradores, clientes, proveedores y cualquier persona relacionada con la empresa, que permite reportar incidencias, conductas irregulares o dudas relacionadas con normas internas.'
       </p>
       `,
       open: false
@@ -40,15 +40,6 @@ export class InicioComponent implements OnInit, AfterViewInit, OnDestroy {
       open: false
     },
     {
-      question: '¿Puedo usar el canal si solo tengo una duda?',
-      answer: `
-      <p>
-      Sí. Este canal también está habilitado para consultas sobre la aplicación de normas y procedimientos internos, incluso si no hay una denuncia específica.
-      </p>
-      `,
-      open: false
-    },
-    {
       question: '¿Mi comunicación es confidencial?',
       answer: `
       <p>
@@ -61,13 +52,13 @@ export class InicioComponent implements OnInit, AfterViewInit, OnDestroy {
       question: '¿Qué garantías tengo frente a posibles represalias?',
       answer: `
       <p>
-      En Caro & Asociados no toleramos represalias. Toda persona que haga un reporte de buena fe estará protegida. Se aplicarán medidas para asegurar que no exista ningún tipo de sanción o perjuicio por denunciar.
+      No toleramos represalias. Toda persona que haga un reporte de buena fe estará protegida. Se aplicarán medidas para asegurar que no exista ningún tipo de sanción o perjuicio por denunciar.
       </p>
       `,
       open: false
     },
     {
-      question: '¿Cómo realizo una denuncia o consulta?',
+      question: '¿Cómo realizo una denuncia?',
       answer: `
       <p>
       Solo debes completar el formulario habilitado, asegurándote de incluir la mayor cantidad de detalles posible. Puedes hacerlo con tu nombre o de forma anónima.
@@ -188,8 +179,7 @@ export class InicioComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   openWindow() {
-    const url = 'https://ccfirma.com/wp-content/uploads/2024/04/CC-Codigo-de-Conducta-v.5-22.07.22-1.pdf';
-    window.open(url, '_blank', 'noopener,noreferrer');
+    return;
   }
 
   toggleFaq(index: number) {

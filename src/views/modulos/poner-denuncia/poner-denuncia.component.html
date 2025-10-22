@@ -48,7 +48,8 @@
                 </button>
                 <button type="button" class="disabled:cursor-not-allowed px-4 py-2 background-panton-orange text-white rounded-xl"
                         (click)="goToNext()"
-                        [disabled]="isNextDisabled()">
+                        >
+                        <!-- [disabled]="isNextDisabled()" -->
                     {{ currentStepIndex === steps.length - 1 ? 'Enviar' : 'Siguiente' }}
                     <i *ngIf="currentStepIndex !== steps.length - 1" class="fa-solid fa-caret-right"></i>
                 </button>

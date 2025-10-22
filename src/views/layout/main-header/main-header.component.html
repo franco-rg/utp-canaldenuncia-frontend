@@ -1,10 +1,10 @@
 <header class="fixed bg-gray-950 top-0 right-0 left-0 px-4 md:px-0 py-2.5 shadow-xl z-50">
-    <div class="max-w-screen-lg m-auto">
+    <div class="max-w-5xl m-auto">
         <div class="flex justify-between items-center">
             <!-- Logo -->
             <div class="flex items-center">
-                <a href="https://ccfirma.com/" target="_blank" class="flex items-center">
-                    <img src="../../../assets/img/logo-caro-asociados-letters-white.png" class="h-12" alt="Logo" />
+                <a href="#" target="_blank" class="flex items-center text-white font-bold text-lg">
+                  CanalDenunciaApp  
                 </a>
             </div>
 
@@ -33,11 +33,11 @@
                     [ngClass]="{ 'border-panton-orange': activeSection === 'comoEnviar', 'border-transparent': activeSection !== 'comoEnviar' }">
                     ¿Cómo enviar una Denuncia?
                 </button>
-                <button (click)="navigateTo('soporte')"
+                <!-- <button (click)="navigateTo('soporte')"
                     class="py-2 px-4 text-xs font-bold uppercase border-b-4 transition-all"
                     [ngClass]="{ 'border-panton-orange': activeSection === 'soporte', 'border-transparent': activeSection !== 'soporte' }">
                     Soporte
-                </button>
+                </button> -->
 
                 <button [routerLink]="['/iniciar-sesion']" class="px-3 py-2 text-xs font-bold rounded-xl background-panton-orange text-white shadow-lg md:ml-4">
                     Iniciar Sesión

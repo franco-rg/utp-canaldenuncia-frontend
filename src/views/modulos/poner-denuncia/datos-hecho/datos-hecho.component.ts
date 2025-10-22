@@ -15,7 +15,7 @@ export class DatosHechoComponent {
   empresas: any[] = [
     {
       id: 1,
-      mrca: 'Caro & Asociados'
+      mrca: 'CanalDenunciaApp',
     }
   ];
   tiposDenuncia: TipoDenunciaModel[] = [];

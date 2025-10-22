@@ -46,7 +46,7 @@ const routes: Routes = [
             {
                 path: 'poner-denuncia',
                 component: PonerDenunciaComponent,  
-                resolve: { datos: DatosResolver },
+                // resolve: { datos: DatosResolver },
                 children: [
                     {
                         path: '',
