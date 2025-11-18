@@ -27,10 +27,10 @@ export class PonerDenunciaComponent implements OnInit {
     { label: 'Hechos', path: 'datos-hecho' },
     { label: 'Denunciante', path: 'datos-denunciante' },
     { label: 'Denuncia', path: 'datos-denuncia' },
-    // { label: 'Testigo', path: 'datos-testigo' },
-    // { label: 'Archivos', path: 'datos-archivos' },
-    // { label: 'Finalizar', path: 'finalizar-denuncia' },
-    // { label: 'Asignar Contraseña', path: 'asignar-contrasena' }
+    { label: 'Testigo', path: 'datos-testigo' },
+    { label: 'Archivos', path: 'datos-archivos' },
+    { label: 'Finalizar', path: 'finalizar-denuncia' },
+    { label: 'Asignar Contraseña', path: 'asignar-contrasena' }
   ];
 
   breadcrumb = [
@@ -51,12 +51,12 @@ export class PonerDenunciaComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // this.route.url.subscribe(() => {
-    //   const currentPath = this.route.snapshot.firstChild?.routeConfig?.path;
-    //   this.currentStepIndex = this.steps.findIndex(step => step.path === currentPath);
-    // });
+    this.route.url.subscribe(() => {
+      const currentPath = this.route.snapshot.firstChild?.routeConfig?.path;
+      this.currentStepIndex = this.steps.findIndex(step => step.path === currentPath);
+    });
 
-    // window.addEventListener('beforeunload', this.preventExit);
+    window.addEventListener('beforeunload', this.preventExit);
   }
 
   ngAfterViewInit(): void {
@@ -103,8 +103,8 @@ export class PonerDenunciaComponent implements OnInit {
       this.formularioDenunciaService.setFormData(this.steps[this.currentStepIndex].path, data);
     }
 
-    this.router.navigate(['/modulos/poner-denuncia', this.steps[this.currentStepIndex + 1].path]);
     if (this.currentStepIndex < this.steps.length - 1) {
+      this.router.navigate(['/modulos/poner-denuncia', this.steps[this.currentStepIndex + 1].path]);
     } else {
 
       const formData = this.formularioDenunciaService.getFormDataAll();
