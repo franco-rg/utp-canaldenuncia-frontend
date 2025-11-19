@@ -17,8 +17,8 @@ export class DatosTestigoComponent implements OnInit {
     private route: ActivatedRoute
   ) {
     this.formDatosTestigo = new FormGroup({
-      NombreTestigo: new FormControl(''),
-      ApellidosTestigo: new FormControl(''),
+      NombreTestigo: new FormControl('', Validators.pattern(/^[A-Za-z\s]+$/)),
+      ApellidosTestigo: new FormControl('', Validators.pattern(/^[A-Za-z\s]+$/)),
       CorreoTestigo: new FormControl('', Validators.email),
       TelefonoTestigo: new FormControl('', Validators.pattern(/^\d{9}$/)),
       ComentariosTestigo: new FormControl('', Validators.maxLength(4000))

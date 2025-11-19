@@ -11,10 +11,10 @@ import { DenunciaModel } from 'src/resources/models/Denuncia.model';
   providedIn: 'root'
 })
 export class CanalAdminService {
-  private apiUrl: string = `${config.URL}/CanalDenuncias/Configuracion/Index?handler`;
-  private apiUrlDenuncias: string = `${config.URL}/CanalDenuncias/Denuncias/Index?handler`;
-  private apiUrlUsuarios: string = `${config.URL}/Usuarios/Personas/Index?handler`;
-  private apiUrlGrupoDatos: string = `${config.URL}/Seguridad/GrupoDato/Index?handler`;
+  private apiUrl: string = `${config.URL}/Configuracion`;
+  private apiUrlDenuncias: string = `${config.URL}/Denuncia`;
+  private apiUrlUsuarios: string = `${config.URL}/Personas`;
+  private apiUrlGrupoDatos: string = `${config.URL}/GrupoDato`;
 
   private grupoDatos: any[] = [];
   constructor(private http: HttpClient) { }
@@ -27,7 +27,7 @@ export class CanalAdminService {
 
   getDenuncias(start: number, length: number, id: number = 0): Observable<DenunciaModel[]> {
     const headers = this.getHeaders();
-    let url = `${this.apiUrlDenuncias}=Denuncias&ID=${id}&IDEMPRESA=${config.IDEMPRESA}&CESTDO=A&start=${start}&length=${length}`;
+    let url = `${this.apiUrlDenuncias}/GetDenuncias?ID=${id}&IDEMPRESA=${config.IDEMPRESA}&CESTDO=A&start=${start}&length=${length}`;
     return this.http.get<ReceptorModel[]>(url, { headers })
       .pipe(
         map((response: any) => {
@@ -47,7 +47,7 @@ export class CanalAdminService {
   
     let ID = decodedPayload.nameid;
     const headers = this.getHeaders();
-    let url = `${this.apiUrlUsuarios}=Buscar&ID=${ID}&IDEMPRESA=${config.IDEMPRESA}&CESTDO=A&start=0&length=10`;
+    let url = `${this.apiUrlUsuarios}/GetBuscar?ID=${ID}&IDEMPRESA=${config.IDEMPRESA}&CESTDO=A&start=0&length=10`;
     return this.http.get<any[]>(url, { headers })
       .pipe(
         map((response: any) => {
@@ -63,7 +63,7 @@ export class CanalAdminService {
 
   getDashboard(): Observable<any[]> {
     const headers = this.getHeaders();
-    let url = `${this.apiUrl}=Dashboard&IDEMPRESA=${config.IDEMPRESA}`;
+    let url = `${this.apiUrl}/GetDashboard?IDEMPRESA=${config.IDEMPRESA}`;
     return this.http.get<any[]>(url, { headers })
       .pipe(
         map((response: any) => {
@@ -78,7 +78,7 @@ export class CanalAdminService {
 
   getFindDenuncias(start: number, length: number, id: number = 0): Observable<DenunciaModel> {
     const headers = this.getHeaders();
-    let url = `${this.apiUrlDenuncias}=Denuncias&ID=${id}&IDEMPRESA=${config.IDEMPRESA}&CESTDO=A&start=${start}&length=${length}`;
+    let url = `${this.apiUrlDenuncias}/GetDenuncias?ID=${id}&IDEMPRESA=${config.IDEMPRESA}&CESTDO=A&start=${start}&length=${length}`;
     return this.http.get<ReceptorModel[]>(url, { headers })
       .pipe(
         map((response: any) => {
@@ -92,7 +92,7 @@ export class CanalAdminService {
   }
 
   getReceptores(start: number, length: number, filter: any): Observable<ReceptorModel[]> {
-    let url = `${this.apiUrl}=Receptor&search[value]=${filter.search}&CESTDO=${filter.estado}&IDEMPRESA=${config.IDEMPRESA}&CESTDO=A&start=${start}&length=${length}`;
+    let url = `${this.apiUrl}/GetReceptor?search[value]=${filter.search}&CESTDO=${filter.estado}&IDEMPRESA=${config.IDEMPRESA}&CESTDO=A&start=${start}&length=${length}`;
     return this.http.get<ReceptorModel[]>(url)
       .pipe(
         map((response: any) => {
@@ -106,7 +106,7 @@ export class CanalAdminService {
   }
 
   getDenuncia(start: number, length: number, filter: any): Observable<TipoDenunciaModel[]> {
-    let url = `${this.apiUrl}=TipoDenuncia&search[value]=${filter.search}&CESTDO=${filter.estado}&TIPO=1&IDEMPRESA=${config.IDEMPRESA}&CESTDO=A&start=${start}&length=${length}`;
+    let url = `${this.apiUrl}/GetTipoDenuncia?search[value]=${filter.search}&CESTDO=${filter.estado}&TIPO=1&IDEMPRESA=${config.IDEMPRESA}&CESTDO=A&start=${start}&length=${length}`;
     return this.http.get<TipoDenunciaModel[]>(url)
       .pipe(
         map((response: any) => {
@@ -120,7 +120,7 @@ export class CanalAdminService {
   }
 
   getRelacionEmpresa(start: number, length: number, filter: any): Observable<RelacionEmpresaModel[]> {
-    let url = `${this.apiUrl}=RelacionEmpresa&search[value]=${filter.search}&CESTDO=${filter.estado}&TIPO=2&IDEMPRESA=${config.IDEMPRESA}&CESTDO=A&start=${start}&length=${length}`;
+    let url = `${this.apiUrl}/GetRelacionEmpresa?search[value]=${filter.search}&CESTDO=${filter.estado}&TIPO=2&IDEMPRESA=${config.IDEMPRESA}&CESTDO=A&start=${start}&length=${length}`;
     return this.http.get<RelacionEmpresaModel[]>(url)
       .pipe(
         map((response: any) => {
@@ -134,7 +134,7 @@ export class CanalAdminService {
   }
 
   getMedidasCautelares(start: number, length: number, filter: any): Observable<any[]> {
-    let url = `${this.apiUrl}=RelacionEmpresa&search[value]=${filter.search}&CESTDO=${filter.estado}&TIPO=4&IDEMPRESA=${config.IDEMPRESA}&CESTDO=A&start=${start}&length=${length}`;
+    let url = `${this.apiUrl}/GetRelacionEmpresa?search[value]=${filter.search}&CESTDO=${filter.estado}&TIPO=4&IDEMPRESA=${config.IDEMPRESA}&CESTDO=A&start=${start}&length=${length}`;
     return this.http.get<any[]>(url)
       .pipe(
         map((response: any) => {
@@ -148,7 +148,7 @@ export class CanalAdminService {
   }
 
   getRoles(start: number, length: number, filter: any): Observable<RelacionEmpresaModel[]> {
-    let url = `${this.apiUrl}=RelacionEmpresa&search[value]=${filter.search}&CESTDO=${filter.estado}&TIPO=3&IDEMPRESA=${config.IDEMPRESA}&CESTDO=A&start=${start}&length=${length}`;
+    let url = `${this.apiUrl}/GetRelacionEmpresa?search[value]=${filter.search}&CESTDO=${filter.estado}&TIPO=3&IDEMPRESA=${config.IDEMPRESA}&CESTDO=A&start=${start}&length=${length}`;
     return this.http.get<RelacionEmpresaModel[]>(url)
       .pipe(
         map((response: any) => {
@@ -163,7 +163,7 @@ export class CanalAdminService {
 
   getUsuarios(start: number, length: number, filter: any): Observable<any[]> {
     const headers = this.getHeaders();
-    let url = `${this.apiUrlUsuarios}=Buscar&search[value]=${filter.search}&CESTDO=${filter.estado}&TIPO=4&IDEMPRESA=${config.IDEMPRESA}&CESTDO=A&start=${start}&length=${length}`;
+    let url = `${this.apiUrlUsuarios}/GetBuscar?search[value]=${filter.search}&CESTDO=${filter.estado}&TIPO=4&IDEMPRESA=${config.IDEMPRESA}&CESTDO=A&start=${start}&length=${length}`;
     return this.http.get<any[]>(url, { headers })
       .pipe(
         map((response: any) => {
@@ -177,7 +177,7 @@ export class CanalAdminService {
   }
 
   getParametros(start: number, length: number, filter: any): Observable<any[]> {
-    let url = `${this.apiUrl}=Parametro&search[value]=${filter.search}&CESTDO=${filter.estado}&IDEMPRESA=${config.IDEMPRESA}&start=${start}&length=${length}`;
+    let url = `${this.apiUrl}/GetParametro?search[value]=${filter.search}&CESTDO=${filter.estado}&IDEMPRESA=${config.IDEMPRESA}&start=${start}&length=${length}`;
     return this.http.get<any[]>(url)
       .pipe(
         map((response: any) => {
@@ -192,7 +192,7 @@ export class CanalAdminService {
 
   getGrupoDatos(GDTOS: string): Observable<any[]> {
     const headers = this.getHeaders();
-    let url = `${this.apiUrlGrupoDatos}=ObtenerAll&GDTOS=${GDTOS}`;
+    let url = `${this.apiUrlGrupoDatos}/GetObtenerAll?GDTOS=${GDTOS}`;
     return this.http.get<any[]>(url, { headers })
       .pipe(
         map((response: any) => {
@@ -224,7 +224,7 @@ export class CanalAdminService {
   // POST
   postChatDenuncia(denuncia: any): Observable<any> {
     const headers = this.getHeaders();
-    const url = `${this.apiUrlDenuncias}=AddChatDenuncia&IDEMPRESA=${config.IDEMPRESA}&CESTDO=A`;
+    const url = `${this.apiUrlDenuncias}/PostAddChatDenuncia?IDEMPRESA=${config.IDEMPRESA}&CESTDO=A`;
     return this.http.post(url, denuncia, { headers })
   }
 
@@ -297,14 +297,14 @@ export class CanalAdminService {
   postMovimientoDenuncia(formData: any): Observable<any> {
     formData.append('IDEMPRESA', config.IDEMPRESA);
     const headers = this.getHeaders();
-    const url = `${this.apiUrlDenuncias}=AddMovimiento`;
+    const url = `${this.apiUrlDenuncias}/PostAddMovimiento`;
     return this.http.post(url, formData, { headers })
   }
 
   postAddTestigo(formData: any): Observable<any> {
     formData.append('IDEMPRESA', config.IDEMPRESA);
     const headers = this.getHeaders();
-    const url = `${this.apiUrlDenuncias}=AddTestigo`;
+    const url = `${this.apiUrlDenuncias}/PostAddTestigo`;
     return this.http.post(url, formData, { headers })
   }
 
@@ -312,14 +312,14 @@ export class CanalAdminService {
     const headers = this.getHeaders();
     let formData = new FormData();
     formData.append('ID', id.toString());
-    const url = `${this.apiUrlDenuncias}=DeleteTestigo`;
+    const url = `${this.apiUrlDenuncias}/PostDeleteTestigo`;
     return this.http.post(url, formData, { headers })
   }
 
   postAddDocumento(formData: any): Observable<any> {
     formData.append('IDEMPRESA', config.IDEMPRESA);
     const headers = this.getHeaders();
-    const url = `${this.apiUrlDenuncias}=AddDocumento`;
+    const url = `${this.apiUrlDenuncias}/PostAddDocumento`;
     return this.http.post(url, formData, { headers })
   }
 
@@ -327,20 +327,20 @@ export class CanalAdminService {
     const headers = this.getHeaders();
     let formData = new FormData();
     formData.append('ID', id.toString());
-    const url = `${this.apiUrlDenuncias}=DeleteDocumento`;
+    const url = `${this.apiUrlDenuncias}/PostDeleteDocumento`;
     return this.http.post(url, formData, { headers })
   }
 
   postAddAcciones(formData: any): Observable<any> {
     formData.append('IDEMPRESA', config.IDEMPRESA);
     const headers = this.getHeaders();
-    const url = `${this.apiUrlDenuncias}=AddAcciones`;
+    const url = `${this.apiUrlDenuncias}/PostAddAcciones`;
     return this.http.post(url, formData, { headers })
   }
 
   postUpdateAcciones(formData: any): Observable<any> {
     const headers = this.getHeaders();
-    const url = `${this.apiUrlDenuncias}=UpdateAcciones`;
+    const url = `${this.apiUrlDenuncias}/PostUpdateAcciones`;
     return this.http.post(url, formData, { headers })
   }
 
@@ -348,7 +348,7 @@ export class CanalAdminService {
     const headers = this.getHeaders();
     let formData = new FormData();
     formData.append('ID', id.toString());
-    const url = `${this.apiUrlDenuncias}=DeleteAcciones`;
+    const url = `${this.apiUrlDenuncias}/PostDeleteAcciones`;
     return this.http.post(url, formData, { headers })
   }
 

@@ -10,8 +10,8 @@ import { RelacionEmpresaModel } from 'src/resources/models/RelacionEmpresa.model
   providedIn: 'root'
 })
 export class FormularioDenunciaService {
-  private apiUrl: string = `${config.URL}/canaldenuncias/configuracion/Index?handler`;
-  private apiUrlDenuncia: string = `${config.URL}/canaldenuncias/denuncias/Index?handler`;
+  private apiUrl: string = `${config.URL}/CanalDenuncias`;
+  private apiUrlDenuncia: string = `${config.URL}/Denuncia`;
 
   private TipoDenunciaUrl: TipoDenunciaModel[] = [];
   private ReceptorUrl: ReceptorModel[] = [];
@@ -27,7 +27,7 @@ export class FormularioDenunciaService {
       'XSRF-TOKEN': '2XJ34B48FM39ASF909SDGDSG'
     });
 
-    return this.http.post(`${this.apiUrlDenuncia}=AddDenuncia`, data, { headers })
+    return this.http.post(`${this.apiUrlDenuncia}/PostAddDenuncia`, data, { headers })
       .pipe(
         map((response: any) => {
           return { success: response.codEstado > 0, codigo: `DENUNCIA_${response.codEstado}` };
@@ -38,7 +38,7 @@ export class FormularioDenunciaService {
 
   // GET
   getFinData(): Observable<any> {
-    const receptores$ = this.http.get<ReceptorModel[]>(`${this.apiUrl}=Receptor&IDEMPRESA=${config.IDEMPRESA}&CESTDO=A&start=0&length=1000`)
+    const receptores$ = this.http.get<ReceptorModel[]>(`${this.apiUrl}/recepcion?IDEMPRESA=${config.IDEMPRESA}&CESTDO=A&start=0&length=1000`)
       .pipe(
         map((response: any) => {
           const data = response?.data?.length ? response.data : [];
@@ -47,7 +47,7 @@ export class FormularioDenunciaService {
         })
       );
   
-    const tipoDenuncia$ = this.http.get<TipoDenunciaModel[]>(`${this.apiUrl}=TipoDenuncia&IDEMPRESA=${config.IDEMPRESA}&TIPO=1&CESTDO=A&start=0&length=1000`)
+    const tipoDenuncia$ = this.http.get<TipoDenunciaModel[]>(`${this.apiUrl}/tipo-denuncia?IDEMPRESA=${config.IDEMPRESA}&TIPO=1&CESTDO=A&start=0&length=1000`)
       .pipe(
         map((response: any) => {
           const data = response?.data?.length ? response.data : [];
@@ -56,7 +56,7 @@ export class FormularioDenunciaService {
         })
       );
 
-    const relacionEmpresa$ = this.http.get<RelacionEmpresaModel[]>(`${this.apiUrl}=TipoDenuncia&IDEMPRESA=${config.IDEMPRESA}&TIPO=2&CESTDO=A&start=0&length=1000`)
+    const relacionEmpresa$ = this.http.get<RelacionEmpresaModel[]>(`${this.apiUrl}/tipo-denuncia?IDEMPRESA=${config.IDEMPRESA}&TIPO=2&CESTDO=A&start=0&length=1000`)
       .pipe(
         map((response: any) => {
           const data = response?.data?.length ? response.data : [];

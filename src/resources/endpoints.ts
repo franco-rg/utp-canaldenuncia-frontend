@@ -7,11 +7,8 @@ const ENTORNO: string = 'DEV'; // 'DEV' or 'PROD'
 const TOKEN : string = "2XJ34B48FM39ASF909SDGDSG";
 const URLS: Record<string, URLS> = {
     DEV: {
-        API: 'http://localhost:7001',
-    },
-    PROD: {
-        API: 'https://caroasociados.pe',
-    },
+        API: 'http://localhost:7001/api',
+    }
 }
 
 export default {

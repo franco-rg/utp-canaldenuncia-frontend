@@ -29,7 +29,7 @@
       <div>
         <p class="text-gray-700 font-medium">El sistema propone como receptor a</p>
         <div class="flex items-center mt-2" *ngIf="receptorPrincipal && receptorPrincipal.ncmpto">
-          <img [src]="receptorPrincipal.rtafto" alt="Receptor Principal" class="w-16 h-16 rounded-full mb-2 img-avatar">
+          <!-- <img [src]="receptorPrincipal.rtafto" alt="Receptor Principal" class="w-16 h-16 rounded-full mb-2 img-avatar"> -->
           <p class="text-lg font-semibold">
             {{ receptorPrincipal.ncmpto }}
           </p>
@@ -42,7 +42,7 @@
       </div>
       <div>
         <p class="text-gray-700 font-medium">Opciones</p>
-        <button type="button" (click)="proponerOtroReceptor()"
+        <button title="Personal encargado para recepcionar la denuncia" type="button" (click)="proponerOtroReceptor()"
           class="px-4 py-2 bg-gray-400 text-white rounded cursor-not-allowe w-full md:w-auto">
           Proponer otro receptor
         </button>

@@ -7,7 +7,7 @@ import { map } from 'rxjs';
     providedIn: 'root'
 })
 export class DenunciaService {
-    private apiUrl: string = `${config.URL}/canaldenuncias/denuncias/Index?handler`;
+    private apiUrl: string = `${config.URL}/Denuncia`;
 
     constructor(private http: HttpClient) { }
 
@@ -16,7 +16,7 @@ export class DenunciaService {
             'XSRF-TOKEN': config.TOKEN,
         });
 
-        return this.http.post(`${this.apiUrl}=ValidateDenuncia`, denuncia, { headers })
+        return this.http.post(`${this.apiUrl}/PostValidateDenuncia`, denuncia, { headers })
             .pipe(
                 map((response: any) => {
                     return response;
@@ -29,7 +29,7 @@ export class DenunciaService {
             'XSRF-TOKEN': config.TOKEN,
         });
 
-        return this.http.get(`${this.apiUrl}=DenunciasFind&ID=${id}&start=0&length=1&IDEMPRESA=${config.IDEMPRESA}`, { headers })
+        return this.http.get(`${this.apiUrl}/GetDenunciasFind?ID=${id}&start=0&length=1&IDEMPRESA=${config.IDEMPRESA}`, { headers })
             .pipe(
                 map((response: any) => {
                     return response;

@@ -5,11 +5,27 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <div>
         <label class="block text-gray-700 font-medium mb-1">Nombre</label>
-        <input type="text" formControlName="NombreTestigo" placeholder="Nombre" class="w-full border p-2 rounded outline-none">
+        <input invalid type="text" formControlName="NombreTestigo" placeholder="Nombre" class="w-full border p-2 rounded outline-none">
+        <div 
+          *ngIf="formDatosTestigo.get('NombreTestigo')?.invalid && (formDatosTestigo.get('NombreTestigo')?.dirty || formDatosTestigo.get('NombreTestigo')?.touched)" 
+          class="text-red-500 text-sm mt-1"
+        >
+          <div *ngIf="formDatosTestigo.get('NombreTestigo')?.errors?.['pattern']">
+            Solo se permiten letras y espacios.
+          </div>
+        </div>
       </div>
       <div>
         <label class="block text-gray-700 font-medium mb-1">Apellidos</label>
         <input type="text" formControlName="ApellidosTestigo" placeholder="Apellidos" class="w-full border p-2 rounded outline-none">
+        <div 
+          *ngIf="formDatosTestigo.get('ApellidosTestigo')?.invalid && (formDatosTestigo.get('ApellidosTestigo')?.dirty || formDatosTestigo.get('ApellidosTestigo')?.touched)" 
+          class="text-red-500 text-sm mt-1"
+        >
+          <div *ngIf="formDatosTestigo.get('ApellidosTestigo')?.errors?.['pattern']">
+            Solo se permiten letras y espacios.
+          </div>
+        </div>
       </div>
       <div>
         <label class="block text-gray-700 font-medium mb-1">Correo</label>

@@ -73,7 +73,7 @@ export class VisualizarDenunciaComponent implements OnInit {
       },
       (error: any) => {
         this.loading = false;
-        this.notyf.error('Error en la conexión con el servidor: ' + error.message);
+        this.notyf.error('Inicio de sesión invalido\nNo se reconocen las credenciales');
       }
     );
   }
@@ -89,8 +89,8 @@ export class VisualizarDenunciaComponent implements OnInit {
     this.denuncia = {} as any;
     this.isDenunciaOk = false;
     this.formLogin.reset();
-    this.formLogin.get('CODIGO')?.setValue('DENUNCIA_36');
-    this.formLogin.get('CONTRASENA')?.setValue('12345cC.');
+    this.formLogin.get('CODIGO')?.setValue('');
+    this.formLogin.get('CONTRASENA')?.setValue('');
   }
 
   sendMessage() {

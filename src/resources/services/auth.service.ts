@@ -8,7 +8,7 @@ import config from 'src/resources/endpoints';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl: string = `${config.URL}/Login/Index?handler`;
+  private apiUrl: string = `${config.URL}/Login`;
 
   private usuarios = [
     { email: 'admin@example.com', password: 'admin123' },
@@ -23,7 +23,7 @@ export class AuthService {
     });
 
 
-    return this.http.post(`${this.apiUrl}=Login`, formData, { headers })
+    return this.http.post(`${this.apiUrl}`, formData, { headers })
       .pipe(
         map((response: any) => {
           if (response.succeeded > 0) {
@@ -56,7 +56,7 @@ export class AuthService {
       return of(false);
     }
 
-    return this.http.get(`${this.apiUrl}=Validate&accessToken=${localStorage.getItem('token')}`, { observe: 'response' })
+    return this.http.get(`${this.apiUrl}?accessToken=${localStorage.getItem('token')}`, { observe: 'response' })
       .pipe(
         map((response: any) => {
           if (response.status === 200) {
