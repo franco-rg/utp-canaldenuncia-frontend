@@ -106,7 +106,7 @@ export class CanalAdminService {
   }
 
   getDenuncia(start: number, length: number, filter: any): Observable<TipoDenunciaModel[]> {
-    let url = `${this.apiUrl}/GetTipoDenuncia?search[value]=${filter.search}&CESTDO=${filter.estado}&TIPO=1&IDEMPRESA=${config.IDEMPRESA}&CESTDO=A&start=${start}&length=${length}`;
+    let url = `${this.apiUrl}/GetTipoDenuncia?search[value]=${filter.search}&CESTDO=${"A"}&TIPO=1&IDEMPRESA=${config.IDEMPRESA}&CESTDO=A&start=${start}&length=${length}`;
     return this.http.get<TipoDenunciaModel[]>(url)
       .pipe(
         map((response: any) => {
@@ -177,7 +177,7 @@ export class CanalAdminService {
   }
 
   getParametros(start: number, length: number, filter: any): Observable<any[]> {
-    let url = `${this.apiUrl}/GetParametro?search[value]=${filter.search}&CESTDO=${filter.estado}&IDEMPRESA=${config.IDEMPRESA}&start=${start}&length=${length}`;
+    let url = `${this.apiUrl}/GetParametro?search[value]=${filter.search}&CESTDO=${"A"}&IDEMPRESA=${config.IDEMPRESA}&start=${start}&length=${length}`;
     return this.http.get<any[]>(url)
       .pipe(
         map((response: any) => {
@@ -224,7 +224,7 @@ export class CanalAdminService {
   // POST
   postChatDenuncia(denuncia: any): Observable<any> {
     const headers = this.getHeaders();
-    const url = `${this.apiUrlDenuncias}/PostAddChatDenuncia?IDEMPRESA=${config.IDEMPRESA}&CESTDO=A`;
+    const url = `${this.apiUrlDenuncias}/PostAddChatDenuncia`;
     return this.http.post(url, denuncia, { headers })
   }
 

@@ -26,8 +26,8 @@ export class LogoutDenunciaComponent {
     private router: Router
   ) {
     this.formLogin = new FormGroup({
-      CODIGO: new FormControl('DENUNCIA_36', [Validators.required]),
-      CONTRASENA: new FormControl('12345cC.', [Validators.required]),
+      CODIGO: new FormControl('', [Validators.required]),
+      CONTRASENA: new FormControl('', [Validators.required]),
     });
   }
 
